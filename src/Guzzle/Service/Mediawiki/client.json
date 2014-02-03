@@ -185,6 +185,56 @@
                 }
             }
         },
+		"createaccount": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"description": "Create a new user account",
+			"parameters": {
+				"action": {
+					"location": "query",
+					"type": "string",
+					"default": "createaccount",
+					"static": true
+				},
+				"name": {
+					"location": "query",
+					"type": "string",
+					"description": "User Name",
+					"required": true
+				},
+				"password": {
+					"location": "query",
+					"type": "string",
+					"description": "Password",
+					"required": true
+				},
+				"token": {
+					"location": "query",
+					"type": "string",
+					"description": "Account creation token obtained in first request"
+				},
+				"email": {
+					"location": "query",
+					"type": "string",
+					"description": "Email address of user"
+				},
+				"realname": {
+					"location": "query",
+					"type": "string",
+					"description": "Real name of user"
+				},
+				"reason": {
+					"location": "query",
+					"type": "string",
+					"description": "Reason for creating the account to be put in the logs"
+				},
+				"language": {
+					"location": "query",
+					"type": "string",
+					"description": "Language code to set as default for the user"
+				}
+			}
+		},
         "tokens": {
             "extends": "_abstract_request",
             "description": "Gets tokens for data-modifying actions",
