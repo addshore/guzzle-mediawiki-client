@@ -15,6 +15,7 @@ use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
  * @method array logout
  * @method array tokens
  * @method array upload
+ * @method array createaccount
  */
 class MediawikiApiClient extends Client
 {

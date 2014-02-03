@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true">
+<phpunit bootstrap="./tests/bootstrap-integration.php" colors="true">
     <testsuites>
         <testsuite name="addwiki/guzzle-mediawiki-client/integration">
             <directory suffix="Test.php">./tests/integration</directory>
