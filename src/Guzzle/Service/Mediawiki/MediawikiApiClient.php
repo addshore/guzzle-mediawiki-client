@@ -1,9 +1,8 @@
 <?php
 
-namespace Birke\Mediawiki\Api;
+namespace Guzzle\Service\Mediawiki;
 
 use Guzzle\Service\Client;
-use Guzzle\Service\Inspector;
 use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Cookie\CookiePlugin;

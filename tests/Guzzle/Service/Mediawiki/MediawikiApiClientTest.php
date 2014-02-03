@@ -1,7 +1,6 @@
 <?php
 
-
-namespace Birke\Mediawiki\Api\Tests;
+namespace Guzzle\Service\Mediawiki\Tests;
 
 class MediawikiApiClientTest extends \Guzzle\Tests\GuzzleTestCase
 {    

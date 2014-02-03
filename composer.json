@@ -21,8 +21,8 @@
     },
     "autoload": {
         "psr-0": { 
-            "Birke\\Mediawiki\\Api": "src/",
-            "Birke\\Mediawiki\\Api\\Tests": "tests/" 
+            "Guzzle\\Service\\Mediawiki": "src/",
+            "Guzzle\\Service\\Mediawiki\\Tests": "tests/"
         }
     }
 }

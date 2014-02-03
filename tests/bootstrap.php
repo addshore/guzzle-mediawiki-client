@@ -11,6 +11,6 @@ require_once $root . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'aut
 
 Guzzle\Tests\GuzzleTestCase::setServiceBuilder(Guzzle\Service\Builder\ServiceBuilder::factory(array(
     'client' => array(
-        'class' => 'Birke\\Mediawiki\\Api\\MediawikiApiClient'
+        'class' => 'Guzzle\\Service\\Mediawiki\\MediawikiApiClient'
     )
 )));
