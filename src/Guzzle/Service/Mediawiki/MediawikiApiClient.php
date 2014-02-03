@@ -2,6 +2,7 @@
 
 namespace Guzzle\Service\Mediawiki;
 
+use Guzzle\Common\Exception\InvalidArgumentException;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Common\Collection;
@@ -16,25 +17,23 @@ use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
  * @method array tokens( array $params )
  * @method array upload( array $params )
  * @method array createaccount( array $params )
+ * @method array edit( array $params )
  */
 class MediawikiApiClient extends Client
 {
-    /**
-     * Factory method to create a new MediawikiApiClient
-     *
-     * @param array|Collection $config Configuration data. Array keys:
-     *    base_url - Base URL of web service
-     *
-     * @return MediawikiApiClient
-     */
+	/**
+	 * Factory method to create a new MediawikiApiClient
+	 *
+	 * @param array|Collection $config Configuration data. Array keys:
+	 *    base_url - Base URL of web service
+	 *
+	 * @throws InvalidArgumentException
+	 * @return MediawikiApiClient
+	 */
     public static function factory($config = array())
     {
-        $default = array(
-            'base_url' => "https://en.wikipedia.org/w/api.php",
-        );
-
         $required = array('base_url');
-        $config = Collection::fromConfig($config, $default, $required);
+        $config = Collection::fromConfig($config, array(), $required);
 
         $client = new self($config->get('base_url'));
 

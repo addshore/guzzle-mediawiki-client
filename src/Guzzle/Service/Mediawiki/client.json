@@ -356,6 +356,140 @@
                 }
 
             }
-      }
+        },
+		"edit": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"description": "Create and edit pages",
+			"parameters": {
+				"action": {
+					"location": "postField",
+					"type": "string",
+					"default": "edit",
+					"static": true
+				},
+				"title": {
+					"location": "postField",
+					"description": "Title of the page you want to edit. Cannot be used together with pageid",
+					"type": "string"
+				},
+				"pageid": {
+					"location": "postField",
+					"description": "Page ID of the page you want to edit. Cannot be used together with title",
+					"type": "integer"
+				},
+				"section": {
+					"location": "postField",
+					"description": "Section number. 0 for the top section, 'new' for a new section",
+					"type": "integer|string"
+				},
+				"sectiontitle": {
+					"location": "postField",
+					"description": "The title for a new section",
+					"type": "string"
+				},
+				"text": {
+					"location": "postField",
+					"description": "Page content",
+					"type": "string"
+				},
+				"token": {
+					"location": "postField",
+					"description": "Edit token",
+					"type": "string",
+					"required": true
+				},
+				"summary": {
+					"location": "postField",
+					"description": "Edit summary",
+					"type": "string"
+				},
+				"minor": {
+					"location": "postField",
+					"description": "Minor edit",
+					"type": "boolean"
+				},
+				"notminor": {
+					"location": "postField",
+					"description": "Non-minor edit",
+					"type": "boolean"
+				},
+				"bot": {
+					"location": "postField",
+					"description": "Mark this edit as bot",
+					"type": "boolean"
+				},
+				"basetimestamp": {
+					"location": "postField",
+					"description": "Timestamp of the base revision (used to detect edit conflicts)",
+					"type": "string"
+				},
+				"starttimestamp": {
+					"location": "postField",
+					"description": "Timestamp when you obtained the edit token",
+					"type": "string"
+				},
+				"recreate": {
+					"location": "postField",
+					"description": "Override any errors about the article having been deleted in the meantime",
+					"type": "boolean"
+				},
+				"createonly": {
+					"location": "postField",
+					"description": "Don't edit the page if it exists already",
+					"type": "boolean"
+				},
+				"nocreate": {
+					"location": "postField",
+					"description": "Throw an error if the page doesn't exist",
+					"type": "boolean"
+				},
+				"watchlist": {
+					"location": "postField",
+					"description": "Unconditionally add or remove the page from your watchlist",
+					"type": "string"
+				},
+				"md5": {
+					"location": "postField",
+					"description": "The MD5 hash of the text parameter, or the prependtext and appendtext parameters concatenated",
+					"type": "string"
+				},
+				"prependtext": {
+					"location": "postField",
+					"description": "Add this text to the beginning of the page. Overrides text",
+					"type": "string"
+				},
+				"appendtext": {
+					"location": "postField",
+					"description": "Add this text to the end of the page. Overrides text.",
+					"type": "string"
+				},
+				"undo": {
+					"location": "postField",
+					"description": "Undo this revision. Overrides text, prependtext and appendtext",
+					"type": "string"
+				},
+				"undoafter": {
+					"location": "postField",
+					"description": "Undo all revisions from undo to this one. If not set, just undo one revision",
+					"type": "string"
+				},
+				"redirect": {
+					"location": "postField",
+					"description": "Automatically resolve redirects",
+					"type": "boolean"
+				},
+				"contentformat": {
+					"location": "postField",
+					"description": "Content serialization format used for the input text",
+					"type": "string"
+				},
+				"contentmodel": {
+					"location": "postField",
+					"description": "Content model of the new content",
+					"type": "string"
+				}
+			}
+		}
     }
 }
