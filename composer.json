@@ -4,11 +4,15 @@
     "description": "A Mediawiki API client for Guzzle",
     "keywords": ["Guzzle"],
     "license": "MIT",
+
     "authors": [
         {
             "name": "Gabriel Birke",
             "email": "gb@birke-software.de"
-        }
+        },
+		{
+			"name": "Addshore"
+		}
     ],
     "require": {
         "php": ">=5.3.2",
