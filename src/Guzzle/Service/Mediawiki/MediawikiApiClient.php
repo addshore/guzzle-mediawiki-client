@@ -9,13 +9,13 @@ use Guzzle\Plugin\Cookie\CookiePlugin;
 use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
 
 /**
- * @method array help
- * @method array parse
- * @method array login
- * @method array logout
- * @method array tokens
- * @method array upload
- * @method array createaccount
+ * @method array help( array $params )
+ * @method array parse( array $params )
+ * @method array login( array $params )
+ * @method array logout( array $params )
+ * @method array tokens( array $params )
+ * @method array upload( array $params )
+ * @method array createaccount( array $params )
  */
 class MediawikiApiClient extends Client
 {
