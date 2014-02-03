@@ -2,7 +2,9 @@
 
 namespace Guzzle\Service\Mediawiki\Tests;
 
-class MediawikiApiClientTest extends \Guzzle\Tests\GuzzleTestCase
+use Guzzle\Tests\GuzzleTestCase;
+
+class MediawikiApiClientTest extends GuzzleTestCase
 {    
     public function testHelp()
     {
