@@ -1,9 +1,10 @@
 <?php
 
+namespace Guzzle\Service\Mediawiki\UnitTests;
 
-namespace Birke\Mediawiki\Api\Tests;
+use Guzzle\Tests\GuzzleTestCase;
 
-class MediawikiApiClientTest extends \Guzzle\Tests\GuzzleTestCase
+class MediawikiApiClientTest extends GuzzleTestCase
 {    
     public function testHelp()
     {

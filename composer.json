@@ -1,7 +1,7 @@
 {
-    "name": "gbirke/mediawiki-api",
+    "name": "addwiki/guzzle-mediawiki-client",
     "type": "library",
-    "description": "A Mediawiki API client",
+    "description": "A Mediawiki API client for Guzzle",
     "keywords": ["Guzzle"],
     "license": "MIT",
     "authors": [
@@ -14,15 +14,11 @@
         "php": ">=5.3.2",
         "guzzle/guzzle": "~3.2"
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
-    },
     "autoload": {
         "psr-0": { 
-            "Birke\\Mediawiki\\Api": "src/",
-            "Birke\\Mediawiki\\Api\\Tests": "tests/" 
+            "Guzzle\\Service\\Mediawiki": "src/",
+            "Guzzle\\Service\\Mediawiki\\UnitTests": "tests/unit/",
+            "Guzzle\\Service\\Mediawiki\\IntegrationTests": "tests/integration/"
         }
     }
 }

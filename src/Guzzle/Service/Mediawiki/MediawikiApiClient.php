@@ -1,14 +1,22 @@
 <?php
 
-namespace Birke\Mediawiki\Api;
+namespace Guzzle\Service\Mediawiki;
 
 use Guzzle\Service\Client;
-use Guzzle\Service\Inspector;
 use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Cookie\CookiePlugin;
 use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
 
+/**
+ * @method array help
+ * @method array parse
+ * @method array login
+ * @method array logout
+ * @method array tokens
+ * @method array upload
+ * @method array createaccount
+ */
 class MediawikiApiClient extends Client
 {
     /**

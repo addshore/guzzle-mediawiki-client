@@ -1,14 +1,14 @@
-# mediawiki-api-client
+# guzzle-mediawiki-client
 
 This is a client for the MediaWiki API. It uses [Guzzle][1] web service library. The client API is a custom web service client based on `Guzzle\Service\Client`.
 
-**WARNING** This client is in no way feature-complete! It only implements the API functions that I need at the moment. Feel free to contribute by expanding the [json file](src/Birke/Mediawiki/Api/client.json) and adding a test.
+This fork was originally based on the [mediawiki-api-client repo by gbirke](https://github.com/gbirke/mediawiki-api-client/tree/1aa59adfcb5144bd0b16ddefa0f54d4831016088)
 
 ## Installation
 
 Use composer to install the library and all its dependencies:
 
-    composer require "gbirke/mediawiki-api:dev-master" 
+    composer require "addwiki/guzzle-mediawiki-client:dev-master"
 
 ## Usage examples
 ### Parse Wiki Text
@@ -16,7 +16,7 @@ Use composer to install the library and all its dependencies:
 ```php
 require 'vendor/autoload.php';
 
-use Birke\Mediawiki\Api\MediawikiApiClient;
+use Guzzle\Service\Mediawiki\MediawikiApiClient;
 
 $client = MediawikiApiClient::factory();
 $parse = $client->getCommand('parse', array(
@@ -32,7 +32,7 @@ print_r($result);
 ```php
 require 'vendor/autoload.php';
 
-use Birke\Mediawiki\Api\MediawikiApiClient;
+use Guzzle\Service\Mediawiki\MediawikiApiClient;
 
 $l = MediawikiApiClient::factory(array(
         'base_url' => "http://localhost/w/api.php",
@@ -50,6 +50,7 @@ $result = $l->login($credentials);
 $resultMsg = $result['login']['result'];
 if ($resultMsg != "NeedToken" && $resultMsg != "Success") {
     die("Login failed: $resultMsg");
+}
 
 // First auth returns "NeedToken", reauthenticate with token
 if ($resultMsg == "NeedToken") {
