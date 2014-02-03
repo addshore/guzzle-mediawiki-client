@@ -17,7 +17,8 @@
     "autoload": {
         "psr-0": { 
             "Guzzle\\Service\\Mediawiki": "src/",
-            "Guzzle\\Service\\Mediawiki\\Tests": "tests/"
+            "Guzzle\\Service\\Mediawiki\\UnitTests": "tests/unit/",
+            "Guzzle\\Service\\Mediawiki\\IntegrationTests": "tests/integration/"
         }
     }
 }

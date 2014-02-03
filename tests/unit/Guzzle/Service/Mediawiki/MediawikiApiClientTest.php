@@ -1,6 +1,6 @@
 <?php
 
-namespace Guzzle\Service\Mediawiki\Tests;
+namespace Guzzle\Service\Mediawiki\UnitTests;
 
 use Guzzle\Tests\GuzzleTestCase;
 
