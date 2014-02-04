@@ -41,7 +41,7 @@ class MediawikiApiClient extends Client
         $client->addSubscriber($cookiePlugin);
 
         $client->setConfig($config);
-        $client->setUserAgent('birke-mediawiki-api-client');
+        $client->setUserAgent('addwiki-mediawiki-api-client');
         $client->setDescription(ServiceDescription::factory(__DIR__ . DIRECTORY_SEPARATOR . 'client.json'));
 
         return $client;
