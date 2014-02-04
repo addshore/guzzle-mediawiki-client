@@ -4,6 +4,9 @@ namespace Guzzle\Service\Mediawiki\IntegrationTests;
 
 use Guzzle\Service\Mediawiki\MediawikiApiClient;
 
+/**
+ * @group integration
+ */
 class MediawikiApiClientTest extends \PHPUnit_Framework_TestCase {
 
 	/**

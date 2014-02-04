@@ -4,7 +4,10 @@ namespace Guzzle\Service\Mediawiki\UnitTests;
 
 use Guzzle\Service\Mediawiki\MediawikiApiClient;
 
-class MediawikiApiClientTest extends \PHPUnit_Framework_TestCase
+/**
+ * @group unit
+ */
+class MediawikiApiClientUnitTest extends \PHPUnit_Framework_TestCase
 {
 
 	const baseurl = 'API';
@@ -18,50 +21,47 @@ class MediawikiApiClientTest extends \PHPUnit_Framework_TestCase
 
 	public function provideCommandsAndUrls() {
 		$wikiText = "= Wiki = \n This is test text. \n\nSecond Paragraph\n\n== Foo ==\nLorem Ipsum";
-		$wikiTextHtml = '%3D%20Wiki%20%3D%20%0A%20This%20is%20test%20text.%20%0A%0ASecond%20Paragraph%0A%0A%3D%3D%20Foo%20%3D%3D%0ALorem%20Ipsum';
 
-		$testCases = array(
-			'help' => array(
-				'?action=help&format=json' => array(),
-				'?action=help&format=json&modules=opensearch%7Cparse' => array('modules' => 'opensearch|parse'),
-			),
-			'paraminfo' => array(
-				'?action=paraminfo&format=json' => array(),
-				'?action=paraminfo&format=json&modules=opensearch%7Cparse' => array('modules' => 'opensearch|parse'),
-			),
-			'parse' => array(
-				'?action=parse&format=json&page=Wiki' => array('page' => 'Wiki'),
-				'?action=parse&format=json&text='.$wikiTextHtml.'&contentmodel=wikitext' => array('text' => $wikiText, 'contentmodel' => 'wikitext'),
-			),
-			'logout' => array(
-				'?action=logout&format=json' => array(),
-			),
-			'login' => array(
-				'?action=login&format=json&lgname=foo&lgpassword=bar' => array( 'lgname' => 'foo', 'lgpassword' => 'bar' ),
-				'?action=login&format=json&lgname=foo&lgpassword=bar&lgtoken=baz' => array( 'lgname' => 'foo', 'lgpassword' => 'bar', 'lgtoken' => 'baz' ),
-			),
-			'createaccount' => array(
-				'?action=createaccount&format=json&name=foo&password=bar' => array( 'name' => 'foo', 'password' => 'bar' ),
-			),
+		return array(
+			array( 'help', array() ),
+			array( 'help', array('modules' => 'opensearch|parse') ),
+			array( 'paraminfo', array() ),
+			array( 'paraminfo', array('modules' => 'opensearch|parse') ),
+			array( 'parse', array('page' => 'Wiki') ),
+			array( 'parse', array('text' => $wikiText, 'contentmodel' => 'wikitext') ),
+			array( 'logout', array() ),
+			array( 'login', array( 'lgname' => 'foo', 'lgpassword' => 'bar' ) ),
+			array( 'login', array( 'lgname' => 'foo', 'lgpassword' => 'bar', 'lgtoken' => 'baz' ) ),
+			array( 'createaccount', array( 'name' => 'foo', 'password' => 'bar' ) ),
 		);
-
-		$provided = array();
-		foreach( $testCases as $action => $details ) {
-			foreach( $details as $url => $params ) {
-				$provided[] = array( $action, $params, $url );
-			}
-		}
-		return $provided;
 	}
 
 	/**
 	 * @dataProvider provideCommandsAndUrls
-	 * @param string $command
+	 * @param string $action
 	 * @param array $params
-	 * @param string $url
 	 */
-	public function testUrlConstruction( $command, $params, $url ) {
-		$this->assertEquals( self::baseurl . $url, $this->getClient()->getCommand($command, $params)->prepare()->getUrl() );
+	public function testUrlConstruction( $action, $params ) {
+		$expectedParams = array_merge( $params, array( 'action' => $action, 'format' => 'json' ) );
+
+		$command = $this->getClient()->getCommand( $action, $params );
+		$request = $command->prepare();
+		$url = $request->getUrl( true );
+		$urlString = $request->getUrl();
+
+		//Assert the params are as we expected
+		$this->assertEquals(
+			$expectedParams,
+			$url->getQuery()->getAll()
+		);
+
+		//Assert the url is okay
+		$expectedStart = self::baseurl . '?action=' . $action . '&format=json';
+		$this->assertStringStartsWith( $expectedStart , $urlString );
+		foreach( $params as $key => $value ) {
+			$expectedMiddle = '&' . rawurlencode( $key ) . '=' . rawurlencode( $value );
+			$this->assertContains( $expectedMiddle, $urlString );
+		}
 	}
 
 }
