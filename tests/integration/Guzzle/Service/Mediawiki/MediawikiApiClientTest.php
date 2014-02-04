@@ -42,4 +42,10 @@ class MediawikiApiClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'success', $result['createaccount']['result'] );
 	}
 
+	public function testParaminfo() {
+		$client = $this->getClient();
+		$result = $client->paraminfo( array( 'modules' => 'help' ) );
+		$this->assertEquals( 'ApiHelp', $result['paraminfo']['modules'][0]['classname'] );
+	}
+
 }

@@ -25,6 +25,10 @@ class MediawikiApiClientTest extends \PHPUnit_Framework_TestCase
 				'?action=help&format=json' => array(),
 				'?action=help&format=json&modules=opensearch%7Cparse' => array('modules' => 'opensearch|parse'),
 			),
+			'paraminfo' => array(
+				'?action=paraminfo&format=json' => array(),
+				'?action=paraminfo&format=json&modules=opensearch%7Cparse' => array('modules' => 'opensearch|parse'),
+			),
 			'parse' => array(
 				'?action=parse&format=json&page=Wiki' => array('page' => 'Wiki'),
 				'?action=parse&format=json&text='.$wikiTextHtml.'&contentmodel=wikitext' => array('text' => $wikiText, 'contentmodel' => 'wikitext'),

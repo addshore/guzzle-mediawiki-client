@@ -31,6 +31,42 @@
                 }
             }
         },
+		"paraminfo": {
+			"extends": "_abstract_request",
+			"parameters": {
+				"action": {
+					"location": "query",
+					"type": "string",
+					"default": "paraminfo",
+					"static": true
+				},
+				"modules": {
+					"location": "query",
+					"type": "string",
+					"description": "List of module names (value of the action= parameter)"
+				},
+				"querymodules": {
+					"location": "query",
+					"type": "string",
+					"description": "List of query module names (value of prop=, meta= or list= parameter)"
+				},
+				"mainmodule": {
+					"location": "query",
+					"type": "string",
+					"description": "Get information about the main (top-level) module as well"
+				},
+				"pagesetmodule": {
+					"location": "query",
+					"type": "string",
+					"description": "Get information about the pageset module (providing titles= and friends) as well"
+				},
+				"formatmodules": {
+					"location": "query",
+					"type": "string",
+					"description": "List of format module names (value of format= parameter)"
+				}
+			}
+		},
         "parse": {
             "extends": "_abstract_request",
             "description": "Parses content and returns parser output\nSee the various prop-Modules of action=query to get information from the currentversion of a page\n  There are several ways to specify the text to parse:\n  1) Specify a page or revision, using page, pageid, or oldid.\n  2) Specify content explicitly, using text, title, and contentmodel.\n  3) Specify only a summary to parse. prop should be given an empty value.\n  https://www.mediawiki.org/wiki/API:Parsing_wikitext#parse",
