@@ -1,531 +1,2041 @@
 {
-    "operations": {
-        "_abstract_request": {
-            "httpMethod": "GET",
-            "parameters": {
-                "action": {
-                    "location": "query",
-                    "type": "string",
-                    "required": true
-                },
-                "format": {
-                    "location": "query",
-                    "type": "string",
-                    "default": "json"
-                }
-            }
-        },
-        "help": {
-            "extends": "_abstract_request",
-            "parameters": {
-                "action": {
-                    "location": "query",
-                    "type": "string",
-                    "default": "help",
-                    "static": true
-                },
-                "modules": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "List of module names (value of the action= parameter). Can specify submodules with a '+'\nSeparate values with '|'\nMaximum number of values 50 (500 for bots)"
-                }
-            }
-        },
-		"paraminfo": {
-			"extends": "_abstract_request",
+	"operations": {
+		"_abstract_request": {
+			"httpMethod": "GET",
 			"parameters": {
 				"action": {
 					"location": "query",
 					"type": "string",
-					"default": "paraminfo",
-					"static": true
+					"required": true
+				},
+				"format": {
+					"location": "query",
+					"type": "string",
+					"default": "json"
+				}
+			}
+		},
+		"login": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Log in and get the authentication tokens.\nIn the event of a successful log-in, a cookie will be attached to your session.\nIn the event of a failed log-in, you will not be able to attempt another log-in\nthrough this method for 5 seconds. This is to prevent password guessing by\nautomated password crackers",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "login",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"lgname": {
+					"name": "lgname",
+					"location": "query",
+					"type": "string",
+					"description": "User Name"
+				},
+				"lgpassword": {
+					"name": "lgpassword",
+					"location": "query",
+					"type": "string",
+					"description": "Password"
+				},
+				"lgdomain": {
+					"name": "lgdomain",
+					"location": "query",
+					"type": "string",
+					"description": "Domain (optional)"
+				},
+				"lgtoken": {
+					"name": "lgtoken",
+					"location": "query",
+					"type": "string",
+					"description": "Login token obtained in first request"
+				}
+			}
+		},
+		"logout": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Log out and clear session data",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "logout",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				}
+			}
+		},
+		"createaccount": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Create a new user account.",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "createaccount",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"name": {
+					"name": "name",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Username"
+				},
+				"password": {
+					"name": "password",
+					"location": "query",
+					"type": "string",
+					"description": "Password (ignored if mailpassword is set)"
+				},
+				"domain": {
+					"name": "domain",
+					"location": "query",
+					"type": "string",
+					"description": "Domain for external authentication (optional)"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"description": "Account creation token obtained in first request"
+				},
+				"email": {
+					"name": "email",
+					"location": "query",
+					"type": "string",
+					"description": "Email address of user (optional)"
+				},
+				"realname": {
+					"name": "realname",
+					"location": "query",
+					"type": "string",
+					"description": "Real name of user (optional)"
+				},
+				"mailpassword": {
+					"name": "mailpassword",
+					"location": "query",
+					"type": "boolean",
+					"description": "If set to any value, a random password will be emailed to the user"
+				},
+				"reason": {
+					"name": "reason",
+					"location": "query",
+					"type": "string",
+					"description": "Optional reason for creating the account to be put in the logs"
+				},
+				"language": {
+					"name": "language",
+					"location": "query",
+					"type": "string",
+					"description": "Language code to set as default for the user (optional, defaults to content language)"
+				}
+			}
+		},
+		"query": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Query API module allows applications to get needed pieces of data from the MediaWiki databases,\nand is loosely based on the old query.php interface.\nAll data modifications will first have to use query to acquire a token to prevent abuse from malicious sites",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "query",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"prop": {
+					"name": "prop",
+					"location": "query",
+					"type": "string",
+					"description": "Which properties to get for the titles\/revisions\/pageids. Module help is available below"
+				},
+				"list": {
+					"name": "list",
+					"location": "query",
+					"type": "string",
+					"description": "Which lists to get. Module help is available below"
+				},
+				"meta": {
+					"name": "meta",
+					"location": "query",
+					"type": "string",
+					"description": "Which metadata to get about the site. Module help is available below"
+				},
+				"indexpageids": {
+					"name": "indexpageids",
+					"location": "query",
+					"type": "boolean",
+					"description": "Include an additional pageids section listing all returned page IDs"
+				},
+				"export": {
+					"name": "export",
+					"location": "query",
+					"type": "boolean",
+					"description": "Export the current revisions of all given or generated pages"
+				},
+				"exportnowrap": {
+					"name": "exportnowrap",
+					"location": "query",
+					"type": "boolean",
+					"description": "Return the export XML without wrapping it in an XML result (same format as Special:Export). Can only be used with export"
+				},
+				"iwurl": {
+					"name": "iwurl",
+					"location": "query",
+					"type": "boolean",
+					"description": "Whether to get the full URL if the title is an interwiki link"
+				},
+				"continue": {
+					"name": "continue",
+					"location": "query",
+					"type": "string",
+					"description": "When present, formats query-continue as key-value pairs that should simply be merged into the original request.\nThis parameter must be set to an empty string in the initial query.\nThis parameter is recommended for all new development, and will be made default in the next API version."
+				},
+				"titles": {
+					"name": "titles",
+					"location": "query",
+					"type": "string",
+					"description": "A list of titles to work on"
+				},
+				"pageids": {
+					"name": "pageids",
+					"location": "query",
+					"type": "integer",
+					"description": "A list of page IDs to work on"
+				},
+				"revids": {
+					"name": "revids",
+					"location": "query",
+					"type": "integer",
+					"description": "A list of revision IDs to work on"
+				},
+				"redirects": {
+					"name": "redirects",
+					"location": "query",
+					"type": "boolean",
+					"description": "Automatically resolve redirects"
+				},
+				"converttitles": {
+					"name": "converttitles",
+					"location": "query",
+					"type": "boolean",
+					"description": "Convert titles to other variants if necessary. Only works if the wiki's content language supports variant conversion.\nLanguages that support variant conversion include gan, iu, kk, ku, shi, sr, tg, uz, zh"
+				},
+				"generator": {
+					"name": "generator",
+					"location": "query",
+					"type": "string",
+					"description": "Get the list of pages to work on by executing the specified query module.\nNOTE: generator parameter names must be prefixed with a 'g', see examples"
+				}
+			}
+		},
+		"expandtemplates": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Expands all templates in wikitext",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "expandtemplates",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"title": {
+					"name": "title",
+					"location": "query",
+					"type": "string",
+					"description": "Title of page"
+				},
+				"text": {
+					"name": "text",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Wikitext to convert"
+				},
+				"generatexml": {
+					"name": "generatexml",
+					"location": "query",
+					"type": "boolean",
+					"description": "Generate XML parse tree"
+				},
+				"includecomments": {
+					"name": "includecomments",
+					"location": "query",
+					"type": "boolean",
+					"description": "Whether to include HTML comments in the output"
+				}
+			}
+		},
+		"parse": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Parses content and returns parser output\nSee the various prop-Modules of action=query to get information from the currentversion of a page\nThere are several ways to specify the text to parse:\n1) Specify a page or revision, using page, pageid, or oldid.\n2) Specify content explicitly, using text, title, and contentmodel.\n3) Specify only a summary to parse. prop should be given an empty value.",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "parse",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"title": {
+					"name": "title",
+					"location": "query",
+					"type": "string",
+					"description": "Title of page the text belongs to. If omitted, \"API\" is used as the title with content model wikitext"
+				},
+				"text": {
+					"name": "text",
+					"location": "query",
+					"type": "string",
+					"description": "Text to parse. Use title or contentmodel to control the content model"
+				},
+				"summary": {
+					"name": "summary",
+					"location": "query",
+					"type": "string",
+					"description": "Summary to parse"
+				},
+				"page": {
+					"name": "page",
+					"location": "query",
+					"type": "string",
+					"description": "Parse the content of this page. Cannot be used together with text and title"
+				},
+				"pageid": {
+					"name": "pageid",
+					"location": "query",
+					"type": "integer",
+					"description": "Parse the content of this page. Overrides page"
+				},
+				"redirects": {
+					"name": "redirects",
+					"location": "query",
+					"type": "boolean",
+					"description": "If the page or the pageid parameter is set to a redirect, resolve it"
+				},
+				"oldid": {
+					"name": "oldid",
+					"location": "query",
+					"type": "integer",
+					"description": "Parse the content of this revision. Overrides page and pageid"
+				},
+				"prop": {
+					"name": "prop",
+					"location": "query",
+					"type": "string",
+					"description": "Which pieces of information to get\n text           - Gives the parsed text of the wikitext\n langlinks      - Gives the language links in the parsed wikitext\n categories     - Gives the categories in the parsed wikitext\n categorieshtml - Gives the HTML version of the categories\n languageshtml  - DEPRECATED. Will be removed in MediaWiki 1.24.\n                  Gives the HTML version of the language links\n links          - Gives the internal links in the parsed wikitext\n templates      - Gives the templates in the parsed wikitext\n images         - Gives the images in the parsed wikitext\n externallinks  - Gives the external links in the parsed wikitext\n sections       - Gives the sections in the parsed wikitext\n revid          - Adds the revision ID of the parsed page\n displaytitle   - Adds the title of the parsed wikitext\n headitems      - Gives items to put in the <head> of the page\n headhtml       - Gives parsed <head> of the page\n iwlinks        - Gives interwiki links in the parsed wikitext\n wikitext       - Gives the original wikitext that was parsed\n properties     - Gives various properties defined in the parsed wikitext"
+				},
+				"pst": {
+					"name": "pst",
+					"location": "query",
+					"type": "boolean",
+					"description": "Do a pre-save transform on the input before parsing it\nOnly valid when used with text"
+				},
+				"onlypst": {
+					"name": "onlypst",
+					"location": "query",
+					"type": "boolean",
+					"description": "Do a pre-save transform (PST) on the input, but don't parse it\nReturns the same wikitext, after a PST has been applied.\nOnly valid when used with text"
+				},
+				"effectivelanglinks": {
+					"name": "effectivelanglinks",
+					"location": "query",
+					"type": "boolean",
+					"description": "Includes language links supplied by extensions\n(for use with prop=langlinks|languageshtml)"
+				},
+				"uselang": {
+					"name": "uselang",
+					"location": "query",
+					"type": "string",
+					"description": "Which language to parse the request in"
+				},
+				"section": {
+					"name": "section",
+					"location": "query",
+					"type": "string",
+					"description": "Only retrieve the content of this section number"
+				},
+				"disablepp": {
+					"name": "disablepp",
+					"location": "query",
+					"type": "boolean",
+					"description": "Disable the PP Report from the parser output"
+				},
+				"generatexml": {
+					"name": "generatexml",
+					"location": "query",
+					"type": "boolean",
+					"description": "Generate XML parse tree (requires contentmodel=wikitext)"
+				},
+				"preview": {
+					"name": "preview",
+					"location": "query",
+					"type": "boolean",
+					"description": "Parse in preview mode"
+				},
+				"sectionpreview": {
+					"name": "sectionpreview",
+					"location": "query",
+					"type": "boolean",
+					"description": "Parse in section preview mode (enables preview mode too)"
+				},
+				"disabletoc": {
+					"name": "disabletoc",
+					"location": "query",
+					"type": "boolean",
+					"description": "Disable table of contents in output"
+				},
+				"contentformat": {
+					"name": "contentformat",
+					"location": "query",
+					"type": "string",
+					"description": "Content serialization format used for the input text\nOnly valid when used with text"
+				},
+				"contentmodel": {
+					"name": "contentmodel",
+					"location": "query",
+					"type": "string",
+					"description": "Content model of the input text. Default is the model of the specified title, or wikitext if title is not specified\nOnly valid when used with text"
+				}
+			}
+		},
+		"opensearch": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Search the wiki using the OpenSearch protocol",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "opensearch",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"search": {
+					"name": "search",
+					"location": "query",
+					"type": "string",
+					"description": "Search string"
+				},
+				"limit": {
+					"name": "limit",
+					"location": "query",
+					"type": "string",
+					"description": "Maximum amount of results to return"
+				},
+				"namespace": {
+					"name": "namespace",
+					"location": "query",
+					"type": "string",
+					"description": "Namespaces to search"
+				},
+				"suggest": {
+					"name": "suggest",
+					"location": "query",
+					"type": "boolean",
+					"description": "Do nothing if $wgEnableOpenSearchSuggest is false"
+				},
+				"format": {
+					"name": "format",
+					"location": "query",
+					"type": "string",
+					"description": "The format of the output"
+				}
+			}
+		},
+		"feedcontributions": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Returns a user contributions feed",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "feedcontributions",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"feedformat": {
+					"name": "feedformat",
+					"location": "query",
+					"type": "string",
+					"description": "The format of the feed"
+				},
+				"user": {
+					"name": "user",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "What users to get the contributions for"
+				},
+				"namespace": {
+					"name": "namespace",
+					"location": "query",
+					"type": "string",
+					"description": "What namespace to filter the contributions by"
+				},
+				"year": {
+					"name": "year",
+					"location": "query",
+					"type": "integer",
+					"description": "From year (and earlier)"
+				},
+				"month": {
+					"name": "month",
+					"location": "query",
+					"type": "integer",
+					"description": "From month (and earlier)"
+				},
+				"tagfilter": {
+					"name": "tagfilter",
+					"location": "query",
+					"type": "string",
+					"description": "Filter contributions that have these tags"
+				},
+				"deletedonly": {
+					"name": "deletedonly",
+					"location": "query",
+					"type": "boolean",
+					"description": "Show only deleted contributions"
+				},
+				"toponly": {
+					"name": "toponly",
+					"location": "query",
+					"type": "boolean",
+					"description": "Only show edits that are latest revisions"
+				},
+				"showsizediff": {
+					"name": "showsizediff",
+					"location": "query",
+					"type": "boolean",
+					"description": "Show the size difference between revisions. Disabled in Miser Mode"
+				}
+			}
+		},
+		"feedwatchlist": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Returns a watchlist feed",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "feedwatchlist",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"feedformat": {
+					"name": "feedformat",
+					"location": "query",
+					"type": "string",
+					"description": "The format of the feed"
+				},
+				"hours": {
+					"name": "hours",
+					"location": "query",
+					"type": "integer",
+					"description": "List pages modified within this many hours from now"
+				},
+				"linktodiffs": {
+					"name": "linktodiffs",
+					"location": "query",
+					"type": "boolean",
+					"description": "Link to change differences instead of article pages"
+				},
+				"linktosections": {
+					"name": "linktosections",
+					"location": "query",
+					"type": "boolean",
+					"description": "Link directly to changed sections if possible"
+				},
+				"allrev": {
+					"name": "allrev",
+					"location": "query",
+					"type": "boolean",
+					"description": "Include multiple revisions of the same page within given timeframe"
+				},
+				"wlowner": {
+					"name": "wlowner",
+					"location": "query",
+					"type": "string",
+					"description": "The name of the user whose watchlist you'd like to access"
+				},
+				"wltoken": {
+					"name": "wltoken",
+					"location": "query",
+					"type": "string",
+					"description": "Give a security token (settable in preferences) to allow access to another user's watchlist"
+				},
+				"wlshow": {
+					"name": "wlshow",
+					"location": "query",
+					"type": "string",
+					"description": "Show only items that meet this criteria.\nFor example, to see only minor edits done by logged-in users, set wlshow=minor|!anon"
+				},
+				"wltype": {
+					"name": "wltype",
+					"location": "query",
+					"type": "string",
+					"description": "Which types of changes to show\n edit           - Regular page edits\n external       - External changes\n new            - Page creations\n log            - Log entries"
+				},
+				"wlexcludeuser": {
+					"name": "wlexcludeuser",
+					"location": "query",
+					"type": "string",
+					"description": "Don't list changes by this user"
+				}
+			}
+		},
+		"help": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Display this help screen. Or the help screen for the specified module",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "help",
+					"static": true,
+					"type": "string",
+					"location": "query"
 				},
 				"modules": {
+					"name": "modules",
+					"location": "query",
+					"type": "string",
+					"description": "List of module names (value of the action= parameter). Can specify submodules with a '+'"
+				},
+				"querymodules": {
+					"name": "querymodules",
+					"location": "query",
+					"type": "string",
+					"description": "Use modules=query+value instead. List of query module names (value of prop=, meta= or list= parameter)"
+				}
+			}
+		},
+		"paraminfo": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Obtain information about certain API parameters and errors",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "paraminfo",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"modules": {
+					"name": "modules",
 					"location": "query",
 					"type": "string",
 					"description": "List of module names (value of the action= parameter)"
 				},
 				"querymodules": {
+					"name": "querymodules",
 					"location": "query",
 					"type": "string",
 					"description": "List of query module names (value of prop=, meta= or list= parameter)"
 				},
 				"mainmodule": {
+					"name": "mainmodule",
 					"location": "query",
-					"type": "string",
+					"type": "boolean",
 					"description": "Get information about the main (top-level) module as well"
 				},
 				"pagesetmodule": {
+					"name": "pagesetmodule",
 					"location": "query",
-					"type": "string",
+					"type": "boolean",
 					"description": "Get information about the pageset module (providing titles= and friends) as well"
 				},
 				"formatmodules": {
+					"name": "formatmodules",
 					"location": "query",
 					"type": "string",
 					"description": "List of format module names (value of format= parameter)"
 				}
 			}
 		},
-        "parse": {
-            "extends": "_abstract_request",
-            "description": "Parses content and returns parser output\nSee the various prop-Modules of action=query to get information from the currentversion of a page\n  There are several ways to specify the text to parse:\n  1) Specify a page or revision, using page, pageid, or oldid.\n  2) Specify content explicitly, using text, title, and contentmodel.\n  3) Specify only a summary to parse. prop should be given an empty value.\n  https://www.mediawiki.org/wiki/API:Parsing_wikitext#parse",
-            "parameters": {
-                "action": {
-                    "location": "query",
-                    "type": "string",
-                    "default": "parse",
-                    "static": true
-                },
-                "page": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Parse the content of this page. Cannot be used together with text and title"
-                },
-                "pageid": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Parse the content of this page. Overrides page"
-                },
-                "text": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Text to parse. Use title or contentmodel to control the content model"
-                },
-                "title": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Title of page the text belongs to. If omitted, \"API\" is used as the title with content model wikitext"
-                },
-                "contentmodel": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Content model of the input text. Default is the model of the specified title, or wikitext if title is not specified\nOnly valid when used with text\nOne value: wikitext, javascript, css, text"
-                },
-                "preview": {
-                    "location": "query",
-                    "type": "boolean",
-                    "description": "Parse in preview mode"
-                },
-                "sectionpreview": {
-                    "location": "query",
-                    "type": "boolean",
-                    "description": "Parse in section preview mode (enables preview mode too)"
-                },
-                "section": {
-                    "location": "query",
-                    "type": "integer",
-                    "description": "Only retrieve the content of this section number"
-                },
-                "oldid": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Parse the content of this revision. Overrides page and pageid"
-                },
-                "summary": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Summary to parse"
-                },
-                "prop": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Which pieces of information to get\n    text           - Gives the parsed text of the wikitext\n    langlinks      - Gives the language links in the parsed wikitext\n    categories     - Gives the categories in the parsed wikitext\n    categorieshtml - Gives the HTML version of the categories\n    languageshtml  - DEPRECATED. Will be removed in MediaWiki 1.24.\n                     Gives the HTML version of the language links\n    links          - Gives the internal links in the parsed wikitext\n    templates      - Gives the templates in the parsed wikitext\n    images         - Gives the images in the parsed wikitext\n    externallinks  - Gives the external links in the parsed wikitext\n    sections       - Gives the sections in the parsed wikitext\n    revid          - Adds the revision ID of the parsed page\n    displaytitle   - Adds the title of the parsed wikitext\n    headitems      - Gives items to put in the <head> of the page\n    headhtml       - Gives parsed <head> of the page\n    iwlinks        - Gives interwiki links in the parsed wikitext\n    wikitext       - Gives the original wikitext that was parsed\n    properties     - Gives various properties defined in the parsed wikitext\n   Values (separate with '|'): text, langlinks, languageshtml, categories, categorieshtml, links, templates, images, externallinks,\n       sections, revid, displaytitle, headitems, headhtml, iwlinks, wikitext, properties"
-                },
-                "redirects": {
-                    "location": "query",
-                    "type": "boolean",
-                    "description": "If the page or the pageid parameter is set to a redirect, resolve it"
-                },
-                "pst": {
-                    "location": "query",
-                    "type": "boolean",
-                    "description": "Do a pre-save transform on the input before parsing it.\nOnly valid when used with text"
-                },
-                "onlypst": {
-                    "location": "query",
-                    "type": "boolean",
-                    "description": "Do a pre-save transform (PST) on the input, but don't parse it.\nReturns the same wikitext, after a PST has been applied.\nOnly valid when used with text"
-                },
-                "effectivelanglinks": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Includes language links supplied by extensions\n(for use with prop=langlinks|languageshtml)"
-                },
-                "uselang": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Which language to parse the request in"
-                },
-                "disablepp": {
-                    "location": "query",
-                    "type": "boolean",
-                    "description": "Disable the PP Report from the parser output"
-                },
-                "generatexml": {
-                    "location": "query",
-                    "type": "boolean",
-                    "description": "Generate XML parse tree (requires contentmodel=wikitext)"
-                },
-                "contentformat": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Content serialization format used for the input text.\nOnly valid when used with text.\nOne value: text/x-wiki, text/javascript, text/css, text/plain"
-                }
-            }   
-        },
-        "login": {
-            "extends": "_abstract_request",
-            "httpMethod": "POST",
-            "description": "Login as user",
-            "parameters": {
-                "action": {
-                    "location": "query",
-                    "type": "string",
-                    "default": "login",
-                    "static": true
-                },
-                "lgname": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "User Name",
-                    "required": true
-                },
-                "lgpassword": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Password",
-                    "required": true
-                },
-                "lgdomain": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Login domain (optional)"
-                },
-                "lgtoken": {
-                    "location": "query",
-                    "type": "string",
-                    "description": "Login token obtained in first request"
-                }
-            }
-        },
-        "logout": {
-            "extends": "_abstract_request",
-            "description": "Log out and clear session data",
-            "parameters": {
-                "action": {
-                    "location": "query",
-                    "type": "string",
-                    "default": "logout",
-                    "static": true
-                }
-            }
-        },
-		"createaccount": {
+		"rsd": {
 			"extends": "_abstract_request",
-			"httpMethod": "POST",
-			"description": "Create a new user account",
+			"httpMethod": "GET",
+			"summary": "Export an RSD (Really Simple Discovery) schema",
 			"parameters": {
 				"action": {
-					"location": "query",
+					"name": "action",
+					"default": "rsd",
+					"static": true,
 					"type": "string",
-					"default": "createaccount",
-					"static": true
-				},
-				"name": {
-					"location": "query",
-					"type": "string",
-					"description": "User Name",
-					"required": true
-				},
-				"password": {
-					"location": "query",
-					"type": "string",
-					"description": "Password",
-					"required": true
-				},
-				"token": {
-					"location": "query",
-					"type": "string",
-					"description": "Account creation token obtained in first request"
-				},
-				"email": {
-					"location": "query",
-					"type": "string",
-					"description": "Email address of user"
-				},
-				"realname": {
-					"location": "query",
-					"type": "string",
-					"description": "Real name of user"
-				},
-				"reason": {
-					"location": "query",
-					"type": "string",
-					"description": "Reason for creating the account to be put in the logs"
-				},
-				"language": {
-					"location": "query",
-					"type": "string",
-					"description": "Language code to set as default for the user"
+					"location": "query"
 				}
 			}
 		},
-        "tokens": {
-            "extends": "_abstract_request",
-            "description": "Gets tokens for data-modifying actions",
-            "parameters": {
-                "action": {
-                    "location": "query",
-                    "type": "string",
-                    "default": "tokens",
-                    "static": true
-                },
-                "type": {
-                    "location": "query",
-                    "type": "string",
-                    "default": "edit"
-                }
-            }
-        },
-        "upload": {
-            "extends": "_abstract_request",
-            "httpMethod": "POST",
-            "description": "Upload a file, or get the status of pending uploads. Several methods are available:\n   * Upload file contents directly, using the \"file\" parameter\n   * Have the MediaWiki server fetch a file from a URL, using the \"url\" parameter\n   * Complete an earlier upload that failed due to warnings, using the \"filekey\" parameter\n  Note that the HTTP POST must be done as a file upload (i.e. using multipart/form-data) when\n  sending the \"file\". Also you must get and send an edit token before doing any upload stuff",
-            "parameters": {
-                "action": {
-                    "location": "postField",
-                    "type": "string",
-                    "default": "upload",
-                    "static": true
-                },
-                "filename": {
-                    "location": "postField",
-                    "description": "Target filename",
-                    "type": "string"
-                },
-                "comment": {
-                    "location": "postField",
-                    "description": "Upload comment. Also used as the initial page text for new files if \"text\" is not specifiedDefault: \n",
-                    "type": "string"
-                },
-                "text": {
-                    "location": "postField",
-                    "description": "Initial page text for new files",
-                    "type": "string"
-                },
-                "token": {
-                    "location": "postField",
-                    "description": "Edit token. You can get one of these through prop=info\nThis parameter is required",
-                    "type": "string"
-                },
-                "watchlist": {
-                    "location": "postField",
-                    "description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watchOne value: watch, preferences, nochange\nDefault: preferences\n",
-                    "type": "string"
-                },
-                "ignorewarnings": {
-                    "location": "postField",
-                    "description": "Ignore any warnings",
-                    "type": "boolean"
-                },
-                "file": {
-                    "location": "postFile",
-                    "description": "File contentsMust be posted as a file upload using multipart\/form-data\n",
-                    "type": "string"
-                },
-                "url": {
-                    "location": "postField",
-                    "description": "URL to fetch the file from",
-                    "type": "string"
-                },
-                "filekey": {
-                    "location": "postField",
-                    "description": "Key that identifies a previous upload that was stashed temporarily.",
-                    "type": "string"
-                },
-                "stash": {
-                    "location": "postField",
-                    "description": "If set, the server will not add the file to the repository and stash it temporarily.",
-                    "type": "boolean"
-                },
-                "filesize": {
-                    "location": "postField",
-                    "description": "Filesize of entire upload",
-                    "type": "integer"
-                },
-                "offset": {
-                    "location": "postField",
-                    "description": "Offset of chunk in bytes",
-                    "type": "integer",
-                    "default": 0
-                },
-                "chunk": {
-                    "location": "postField",
-                    "description": "Chunk contents\nMust be posted as a file upload using multipart\/form-data\n",
-                    "type": "file"
-                },
-                "async": {
-                    "location": "postField",
-                    "description": "Make potentially large file operations asynchronous when possible",
-                    "type": "boolean"
-                },
-                "asyncdownload": {
-                    "location": "postField",
-                    "description": "Make fetching a URL asynchronous",
-                    "type": "boolean"
-                },
-                "leavemessage": {
-                    "location": "postField",
-                    "description": "If asyncdownload is used, leave a message on the user talk page if finished",
-                    "type": "true"
-                },
-                "statuskey": {
-                    "location": "postField",
-                    "description": "Fetch the upload status for this file key (upload by URL)",
-                    "type": "string"
-                },
-                "checkstatus": {
-                    "location": "postField",
-                    "description": "Only fetch the upload status for the given file key",
-                    "type": "boolean"
-                }
-
-            }
-        },
+		"compare": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Get the difference between 2 pages\nYou must pass a revision number or a page title or a page ID id for each part (1 and 2)",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "compare",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"fromtitle": {
+					"name": "fromtitle",
+					"location": "query",
+					"type": "string",
+					"description": "First title to compare"
+				},
+				"fromid": {
+					"name": "fromid",
+					"location": "query",
+					"type": "integer",
+					"description": "First page ID to compare"
+				},
+				"fromrev": {
+					"name": "fromrev",
+					"location": "query",
+					"type": "integer",
+					"description": "First revision to compare"
+				},
+				"totitle": {
+					"name": "totitle",
+					"location": "query",
+					"type": "string",
+					"description": "Second title to compare"
+				},
+				"toid": {
+					"name": "toid",
+					"location": "query",
+					"type": "integer",
+					"description": "Second page ID to compare"
+				},
+				"torev": {
+					"name": "torev",
+					"location": "query",
+					"type": "integer",
+					"description": "Second revision to compare"
+				}
+			}
+		},
+		"tokens": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Gets tokens for data-modifying actions",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "tokens",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"type": {
+					"name": "type",
+					"location": "query",
+					"type": "string",
+					"description": "Type of token(s) to request"
+				}
+			}
+		},
+		"purge": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Purge the cache for the given titles.\nRequires a POST request if the user is not logged in.",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "purge",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"forcelinkupdate": {
+					"name": "forcelinkupdate",
+					"location": "query",
+					"type": "boolean",
+					"description": "Update the links tables"
+				},
+				"forcerecursivelinkupdate": {
+					"name": "forcerecursivelinkupdate",
+					"location": "query",
+					"type": "boolean",
+					"description": "Update the links table, and update the links tables for any page that uses this page as a template"
+				},
+				"titles": {
+					"name": "titles",
+					"location": "query",
+					"type": "string",
+					"description": "A list of titles to work on"
+				},
+				"pageids": {
+					"name": "pageids",
+					"location": "query",
+					"type": "integer",
+					"description": "A list of page IDs to work on"
+				},
+				"revids": {
+					"name": "revids",
+					"location": "query",
+					"type": "integer",
+					"description": "A list of revision IDs to work on"
+				},
+				"redirects": {
+					"name": "redirects",
+					"location": "query",
+					"type": "boolean",
+					"description": "Automatically resolve redirects"
+				},
+				"converttitles": {
+					"name": "converttitles",
+					"location": "query",
+					"type": "boolean",
+					"description": "Convert titles to other variants if necessary. Only works if the wiki's content language supports variant conversion.\nLanguages that support variant conversion include gan, iu, kk, ku, shi, sr, tg, uz, zh"
+				},
+				"generator": {
+					"name": "generator",
+					"location": "query",
+					"type": "string",
+					"description": "Get the list of pages to work on by executing the specified query module.\nNOTE: generator parameter names must be prefixed with a 'g', see examples"
+				}
+			}
+		},
+		"setnotificationtimestamp": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Update the notification timestamp for watched pages.\nThis affects the highlighting of changed pages in the watchlist and history,\nand the sending of email when the \"Email me when a page on my watchlist is\nchanged\" preference is enabled.",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "setnotificationtimestamp",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"entirewatchlist": {
+					"name": "entirewatchlist",
+					"location": "query",
+					"type": "boolean",
+					"description": "Work on all watched pages"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"description": "A token previously acquired via prop=info"
+				},
+				"timestamp": {
+					"name": "timestamp",
+					"location": "query",
+					"type": "string",
+					"description": "Timestamp to which to set the notification timestamp"
+				},
+				"torevid": {
+					"name": "torevid",
+					"location": "query",
+					"type": "integer",
+					"description": "Revision to set the notification timestamp to (one page only)"
+				},
+				"newerthanrevid": {
+					"name": "newerthanrevid",
+					"location": "query",
+					"type": "integer",
+					"description": "Revision to set the notification timestamp newer than (one page only)"
+				},
+				"titles": {
+					"name": "titles",
+					"location": "query",
+					"type": "string",
+					"description": "A list of titles to work on"
+				},
+				"pageids": {
+					"name": "pageids",
+					"location": "query",
+					"type": "integer",
+					"description": "A list of page IDs to work on"
+				},
+				"revids": {
+					"name": "revids",
+					"location": "query",
+					"type": "integer",
+					"description": "A list of revision IDs to work on"
+				},
+				"redirects": {
+					"name": "redirects",
+					"location": "query",
+					"type": "boolean",
+					"description": "Automatically resolve redirects"
+				},
+				"converttitles": {
+					"name": "converttitles",
+					"location": "query",
+					"type": "boolean",
+					"description": "Convert titles to other variants if necessary. Only works if the wiki's content language supports variant conversion.\nLanguages that support variant conversion include gan, iu, kk, ku, shi, sr, tg, uz, zh"
+				},
+				"generator": {
+					"name": "generator",
+					"location": "query",
+					"type": "string",
+					"description": "Get the list of pages to work on by executing the specified query module.\nNOTE: generator parameter names must be prefixed with a 'g', see examples"
+				}
+			}
+		},
+		"rollback": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Undo the last edit to the page. If the last user who edited the page made\nmultiple edits in a row, they will all be rolled back",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "rollback",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"title": {
+					"name": "title",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Title of the page you want to rollback."
+				},
+				"user": {
+					"name": "user",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Name of the user whose edits are to be rolled back. If set incorrectly, you'll get a badtoken error."
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "A rollback token previously retrieved through prop=revisions"
+				},
+				"summary": {
+					"name": "summary",
+					"location": "query",
+					"type": "string",
+					"description": "Custom edit summary. If empty, default summary will be used"
+				},
+				"markbot": {
+					"name": "markbot",
+					"location": "query",
+					"type": "boolean",
+					"description": "Mark the reverted edits and the revert as bot edits"
+				},
+				"watchlist": {
+					"name": "watchlist",
+					"location": "query",
+					"type": "string",
+					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
+				}
+			}
+		},
+		"delete": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Delete a page",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "delete",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"title": {
+					"name": "title",
+					"location": "query",
+					"type": "string",
+					"description": "Title of the page you want to delete. Cannot be used together with pageid"
+				},
+				"pageid": {
+					"name": "pageid",
+					"location": "query",
+					"type": "integer",
+					"description": "Page ID of the page you want to delete. Cannot be used together with title"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "A delete token previously retrieved through prop=info"
+				},
+				"reason": {
+					"name": "reason",
+					"location": "query",
+					"type": "string",
+					"description": "Reason for the deletion. If not set, an automatically generated reason will be used"
+				},
+				"watch": {
+					"name": "watch",
+					"location": "query",
+					"type": "boolean",
+					"description": "Add the page to your watchlist"
+				},
+				"watchlist": {
+					"name": "watchlist",
+					"location": "query",
+					"type": "string",
+					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
+				},
+				"unwatch": {
+					"name": "unwatch",
+					"location": "query",
+					"type": "boolean",
+					"description": "Remove the page from your watchlist"
+				},
+				"oldimage": {
+					"name": "oldimage",
+					"location": "query",
+					"type": "string",
+					"description": "The name of the old image to delete as provided by iiprop=archivename"
+				}
+			}
+		},
+		"undelete": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Restore certain revisions of a deleted page. A list of deleted revisions \n(including timestamps) can be retrieved through list=deletedrevs",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "undelete",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"title": {
+					"name": "title",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Title of the page you want to restore"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "An undelete token previously retrieved through list=deletedrevs"
+				},
+				"reason": {
+					"name": "reason",
+					"location": "query",
+					"type": "string",
+					"description": "Reason for restoring"
+				},
+				"timestamps": {
+					"name": "timestamps",
+					"location": "query",
+					"type": "string",
+					"description": "Timestamps of the revisions to restore. If not set, all revisions will be restored."
+				},
+				"watchlist": {
+					"name": "watchlist",
+					"location": "query",
+					"type": "string",
+					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
+				}
+			}
+		},
+		"protect": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Change the protection level of a page",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "protect",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"title": {
+					"name": "title",
+					"location": "query",
+					"type": "string",
+					"description": "Title of the page you want to (un)protect. Cannot be used together with pageid"
+				},
+				"pageid": {
+					"name": "pageid",
+					"location": "query",
+					"type": "integer",
+					"description": "ID of the page you want to (un)protect. Cannot be used together with title"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "A protect token previously retrieved through prop=info"
+				},
+				"protections": {
+					"name": "protections",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "List of protection levels, formatted action=group (e.g. edit=sysop)"
+				},
+				"expiry": {
+					"name": "expiry",
+					"location": "query",
+					"type": "string",
+					"description": "Expiry timestamps. If only one timestamp is set, it'll be used for all protections.\nUse 'infinite', 'indefinite' or 'never', for a never-expiring protection."
+				},
+				"reason": {
+					"name": "reason",
+					"location": "query",
+					"type": "string",
+					"description": "Reason for (un)protecting"
+				},
+				"cascade": {
+					"name": "cascade",
+					"location": "query",
+					"type": "boolean",
+					"description": "Enable cascading protection (i.e. protect pages included in this page)\nIgnored if not all protection levels are 'sysop' or 'protect'"
+				},
+				"watch": {
+					"name": "watch",
+					"location": "query",
+					"type": "boolean",
+					"description": "If set, add the page being (un)protected to your watchlist"
+				},
+				"watchlist": {
+					"name": "watchlist",
+					"location": "query",
+					"type": "string",
+					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
+				}
+			}
+		},
+		"block": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Block a user",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "block",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"user": {
+					"name": "user",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Username, IP address or IP range you want to block"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"description": "A block token previously obtained through prop=info"
+				},
+				"expiry": {
+					"name": "expiry",
+					"location": "query",
+					"type": "string",
+					"description": "Relative expiry time, e.g. '5 months' or '2 weeks'. If set to 'infinite', 'indefinite' or 'never', the block will never expire."
+				},
+				"reason": {
+					"name": "reason",
+					"location": "query",
+					"type": "string",
+					"description": "Reason for block"
+				},
+				"anononly": {
+					"name": "anononly",
+					"location": "query",
+					"type": "boolean",
+					"description": "Block anonymous users only (i.e. disable anonymous edits for this IP)"
+				},
+				"nocreate": {
+					"name": "nocreate",
+					"location": "query",
+					"type": "boolean",
+					"description": "Prevent account creation"
+				},
+				"autoblock": {
+					"name": "autoblock",
+					"location": "query",
+					"type": "boolean",
+					"description": "Automatically block the last used IP address, and any subsequent IP addresses they try to login from"
+				},
+				"noemail": {
+					"name": "noemail",
+					"location": "query",
+					"type": "boolean",
+					"description": "Prevent user from sending email through the wiki. (Requires the \"blockemail\" right.)"
+				},
+				"hidename": {
+					"name": "hidename",
+					"location": "query",
+					"type": "boolean",
+					"description": "Hide the username from the block log. (Requires the \"hideuser\" right.)"
+				},
+				"allowusertalk": {
+					"name": "allowusertalk",
+					"location": "query",
+					"type": "boolean",
+					"description": "Allow the user to edit their own talk page (depends on $wgBlockAllowsUTEdit)"
+				},
+				"reblock": {
+					"name": "reblock",
+					"location": "query",
+					"type": "boolean",
+					"description": "If the user is already blocked, overwrite the existing block"
+				},
+				"watchuser": {
+					"name": "watchuser",
+					"location": "query",
+					"type": "boolean",
+					"description": "Watch the user\/IP's user and talk pages"
+				}
+			}
+		},
+		"unblock": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Unblock a user",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "unblock",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"id": {
+					"name": "id",
+					"location": "query",
+					"type": "integer",
+					"description": "ID of the block you want to unblock (obtained through list=blocks). Cannot be used together with user"
+				},
+				"user": {
+					"name": "user",
+					"location": "query",
+					"type": "string",
+					"description": "Username, IP address or IP range you want to unblock. Cannot be used together with id"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"description": "An unblock token previously obtained through prop=info"
+				},
+				"reason": {
+					"name": "reason",
+					"location": "query",
+					"type": "string",
+					"description": "Reason for unblock"
+				}
+			}
+		},
+		"move": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Move a page",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "move",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"from": {
+					"name": "from",
+					"location": "query",
+					"type": "string",
+					"description": "Title of the page you want to move. Cannot be used together with fromid"
+				},
+				"fromid": {
+					"name": "fromid",
+					"location": "query",
+					"type": "integer",
+					"description": "Page ID of the page you want to move. Cannot be used together with from"
+				},
+				"to": {
+					"name": "to",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Title you want to rename the page to"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "A move token previously retrieved through prop=info"
+				},
+				"reason": {
+					"name": "reason",
+					"location": "query",
+					"type": "string",
+					"description": "Reason for the move"
+				},
+				"movetalk": {
+					"name": "movetalk",
+					"location": "query",
+					"type": "boolean",
+					"description": "Move the talk page, if it exists"
+				},
+				"movesubpages": {
+					"name": "movesubpages",
+					"location": "query",
+					"type": "boolean",
+					"description": "Move subpages, if applicable"
+				},
+				"noredirect": {
+					"name": "noredirect",
+					"location": "query",
+					"type": "boolean",
+					"description": "Don't create a redirect"
+				},
+				"watch": {
+					"name": "watch",
+					"location": "query",
+					"type": "boolean",
+					"description": "Add the page and the redirect to your watchlist"
+				},
+				"unwatch": {
+					"name": "unwatch",
+					"location": "query",
+					"type": "boolean",
+					"description": "Remove the page and the redirect from your watchlist"
+				},
+				"watchlist": {
+					"name": "watchlist",
+					"location": "query",
+					"type": "string",
+					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
+				},
+				"ignorewarnings": {
+					"name": "ignorewarnings",
+					"location": "query",
+					"type": "boolean",
+					"description": "Ignore any warnings"
+				}
+			}
+		},
 		"edit": {
 			"extends": "_abstract_request",
 			"httpMethod": "POST",
-			"description": "Create and edit pages",
+			"summary": "Create and edit pages.",
 			"parameters": {
 				"action": {
-					"location": "postField",
-					"type": "string",
+					"name": "action",
 					"default": "edit",
-					"static": true
+					"static": true,
+					"type": "string",
+					"location": "query"
 				},
 				"title": {
-					"location": "postField",
-					"description": "Title of the page you want to edit. Cannot be used together with pageid",
-					"type": "string"
+					"name": "title",
+					"location": "query",
+					"type": "string",
+					"description": "Title of the page you want to edit. Cannot be used together with pageid"
 				},
 				"pageid": {
-					"location": "postField",
-					"description": "Page ID of the page you want to edit. Cannot be used together with title",
-					"type": "integer"
+					"name": "pageid",
+					"location": "query",
+					"type": "integer",
+					"description": "Page ID of the page you want to edit. Cannot be used together with title"
 				},
 				"section": {
-					"location": "postField",
-					"description": "Section number. 0 for the top section, 'new' for a new section",
-					"type": "integer|string"
+					"name": "section",
+					"location": "query",
+					"type": "string",
+					"description": "Section number. 0 for the top section, 'new' for a new section"
 				},
 				"sectiontitle": {
-					"location": "postField",
-					"description": "The title for a new section",
-					"type": "string"
+					"name": "sectiontitle",
+					"location": "query",
+					"type": "string",
+					"description": "The title for a new section"
 				},
 				"text": {
-					"location": "postField",
-					"description": "Page content",
-					"type": "string"
+					"name": "text",
+					"location": "query",
+					"type": "string",
+					"description": "Page content"
 				},
 				"token": {
-					"location": "postField",
-					"description": "Edit token",
+					"name": "token",
+					"location": "query",
 					"type": "string",
-					"required": true
+					"required": true,
+					"description": "Edit token. You can get one of these through prop=info.\nThe token should always be sent as the last parameter, or at least, after the text parameter"
 				},
 				"summary": {
-					"location": "postField",
-					"description": "Edit summary",
-					"type": "string"
+					"name": "summary",
+					"location": "query",
+					"type": "string",
+					"description": "Edit summary. Also section title when section=new and sectiontitle is not set"
 				},
 				"minor": {
-					"location": "postField",
-					"description": "Minor edit",
-					"type": "boolean"
+					"name": "minor",
+					"location": "query",
+					"type": "boolean",
+					"description": "Minor edit"
 				},
 				"notminor": {
-					"location": "postField",
-					"description": "Non-minor edit",
-					"type": "boolean"
+					"name": "notminor",
+					"location": "query",
+					"type": "boolean",
+					"description": "Non-minor edit"
 				},
 				"bot": {
-					"location": "postField",
-					"description": "Mark this edit as bot",
-					"type": "boolean"
+					"name": "bot",
+					"location": "query",
+					"type": "boolean",
+					"description": "Mark this edit as bot"
 				},
 				"basetimestamp": {
-					"location": "postField",
-					"description": "Timestamp of the base revision (used to detect edit conflicts)",
-					"type": "string"
+					"name": "basetimestamp",
+					"location": "query",
+					"type": "string",
+					"description": "Timestamp of the base revision (obtained through prop=revisions&rvprop=timestamp).\nUsed to detect edit conflicts; leave unset to ignore conflicts"
 				},
 				"starttimestamp": {
-					"location": "postField",
-					"description": "Timestamp when you obtained the edit token",
-					"type": "string"
+					"name": "starttimestamp",
+					"location": "query",
+					"type": "string",
+					"description": "Timestamp when you obtained the edit token.\nUsed to detect edit conflicts; leave unset to ignore conflicts"
 				},
 				"recreate": {
-					"location": "postField",
-					"description": "Override any errors about the article having been deleted in the meantime",
-					"type": "boolean"
+					"name": "recreate",
+					"location": "query",
+					"type": "boolean",
+					"description": "Override any errors about the article having been deleted in the meantime"
 				},
 				"createonly": {
-					"location": "postField",
-					"description": "Don't edit the page if it exists already",
-					"type": "boolean"
+					"name": "createonly",
+					"location": "query",
+					"type": "boolean",
+					"description": "Don't edit the page if it exists already"
 				},
 				"nocreate": {
-					"location": "postField",
-					"description": "Throw an error if the page doesn't exist",
-					"type": "boolean"
+					"name": "nocreate",
+					"location": "query",
+					"type": "boolean",
+					"description": "Throw an error if the page doesn't exist"
+				},
+				"watch": {
+					"name": "watch",
+					"location": "query",
+					"type": "boolean",
+					"description": "Add the page to your watchlist"
+				},
+				"unwatch": {
+					"name": "unwatch",
+					"location": "query",
+					"type": "boolean",
+					"description": "Remove the page from your watchlist"
 				},
 				"watchlist": {
-					"location": "postField",
-					"description": "Unconditionally add or remove the page from your watchlist",
-					"type": "string"
+					"name": "watchlist",
+					"location": "query",
+					"type": "string",
+					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
 				},
 				"md5": {
-					"location": "postField",
-					"description": "The MD5 hash of the text parameter, or the prependtext and appendtext parameters concatenated",
-					"type": "string"
+					"name": "md5",
+					"location": "query",
+					"type": "string",
+					"description": "The MD5 hash of the text parameter, or the prependtext and appendtext parameters concatenated.\nIf set, the edit won't be done unless the hash is correct"
 				},
 				"prependtext": {
-					"location": "postField",
-					"description": "Add this text to the beginning of the page. Overrides text",
-					"type": "string"
+					"name": "prependtext",
+					"location": "query",
+					"type": "string",
+					"description": "Add this text to the beginning of the page. Overrides text"
 				},
 				"appendtext": {
-					"location": "postField",
-					"description": "Add this text to the end of the page. Overrides text.",
-					"type": "string"
+					"name": "appendtext",
+					"location": "query",
+					"type": "string",
+					"description": "Add this text to the end of the page. Overrides text.\nUse section=new to append a new section"
 				},
 				"undo": {
-					"location": "postField",
-					"description": "Undo this revision. Overrides text, prependtext and appendtext",
-					"type": "string"
+					"name": "undo",
+					"location": "query",
+					"type": "integer",
+					"description": "Undo this revision. Overrides text, prependtext and appendtext"
 				},
 				"undoafter": {
-					"location": "postField",
-					"description": "Undo all revisions from undo to this one. If not set, just undo one revision",
-					"type": "string"
+					"name": "undoafter",
+					"location": "query",
+					"type": "integer",
+					"description": "Undo all revisions from undo to this one. If not set, just undo one revision"
 				},
 				"redirect": {
-					"location": "postField",
-					"description": "Automatically resolve redirects",
-					"type": "boolean"
+					"name": "redirect",
+					"location": "query",
+					"type": "boolean",
+					"description": "Automatically resolve redirects"
 				},
 				"contentformat": {
-					"location": "postField",
-					"description": "Content serialization format used for the input text",
-					"type": "string"
+					"name": "contentformat",
+					"location": "query",
+					"type": "string",
+					"description": "Content serialization format used for the input text"
 				},
 				"contentmodel": {
-					"location": "postField",
-					"description": "Content model of the new content",
-					"type": "string"
+					"name": "contentmodel",
+					"location": "query",
+					"type": "string",
+					"description": "Content model of the new content"
+				}
+			}
+		},
+		"upload": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Upload a file, or get the status of pending uploads. Several methods are available:\n * Upload file contents directly, using the \"file\" parameter\n * Have the MediaWiki server fetch a file from a URL, using the \"url\" parameter\n * Complete an earlier upload that failed due to warnings, using the \"filekey\" parameter\nNote that the HTTP POST must be done as a file upload (i.e. using multipart\/form-data) when\nsending the \"file\". Also you must get and send an edit token before doing any upload stuff",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "upload",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"filename": {
+					"name": "filename",
+					"location": "query",
+					"type": "string",
+					"description": "Target filename"
+				},
+				"comment": {
+					"name": "comment",
+					"location": "query",
+					"type": "string",
+					"description": "Upload comment. Also used as the initial page text for new files if \"text\" is not specified"
+				},
+				"text": {
+					"name": "text",
+					"location": "query",
+					"type": "string",
+					"description": "Initial page text for new files"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Edit token. You can get one of these through prop=info"
+				},
+				"watch": {
+					"name": "watch",
+					"location": "query",
+					"type": "boolean",
+					"description": "Watch the page"
+				},
+				"watchlist": {
+					"name": "watchlist",
+					"location": "query",
+					"type": "string",
+					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
+				},
+				"ignorewarnings": {
+					"name": "ignorewarnings",
+					"location": "query",
+					"type": "boolean",
+					"description": "Ignore any warnings"
+				},
+				"file": {
+					"name": "file",
+					"location": "query",
+					"type": "string",
+					"description": "File contents"
+				},
+				"url": {
+					"name": "url",
+					"location": "query",
+					"type": "string",
+					"description": "URL to fetch the file from"
+				},
+				"filekey": {
+					"name": "filekey",
+					"location": "query",
+					"type": "string",
+					"description": "Key that identifies a previous upload that was stashed temporarily."
+				},
+				"sessionkey": {
+					"name": "sessionkey",
+					"location": "query",
+					"type": "string",
+					"description": "Same as filekey, maintained for backward compatibility."
+				},
+				"stash": {
+					"name": "stash",
+					"location": "query",
+					"type": "boolean",
+					"description": "If set, the server will not add the file to the repository and stash it temporarily."
+				},
+				"filesize": {
+					"name": "filesize",
+					"location": "query",
+					"type": "string",
+					"description": "Filesize of entire upload"
+				},
+				"offset": {
+					"name": "offset",
+					"location": "query",
+					"type": "string",
+					"description": "Offset of chunk in bytes"
+				},
+				"chunk": {
+					"name": "chunk",
+					"location": "query",
+					"type": "string",
+					"description": "Chunk contents"
+				},
+				"async": {
+					"name": "async",
+					"location": "query",
+					"type": "boolean",
+					"description": "Make potentially large file operations asynchronous when possible"
+				},
+				"asyncdownload": {
+					"name": "asyncdownload",
+					"location": "query",
+					"type": "boolean",
+					"description": "Make fetching a URL asynchronous"
+				},
+				"leavemessage": {
+					"name": "leavemessage",
+					"location": "query",
+					"type": "boolean",
+					"description": "If asyncdownload is used, leave a message on the user talk page if finished"
+				},
+				"statuskey": {
+					"name": "statuskey",
+					"location": "query",
+					"type": "string",
+					"description": "Fetch the upload status for this file key (upload by URL)"
+				},
+				"checkstatus": {
+					"name": "checkstatus",
+					"location": "query",
+					"type": "boolean",
+					"description": "Only fetch the upload status for the given file key"
+				}
+			}
+		},
+		"filerevert": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Revert a file to an old version",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "filerevert",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"filename": {
+					"name": "filename",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Target filename without the File: prefix"
+				},
+				"comment": {
+					"name": "comment",
+					"location": "query",
+					"type": "string",
+					"description": "Upload comment"
+				},
+				"archivename": {
+					"name": "archivename",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Archive name of the revision to revert to"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Edit token. You can get one of these through prop=info"
+				}
+			}
+		},
+		"emailuser": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Email a user.",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "emailuser",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"target": {
+					"name": "target",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "User to send email to"
+				},
+				"subject": {
+					"name": "subject",
+					"location": "query",
+					"type": "string",
+					"description": "Subject header"
+				},
+				"text": {
+					"name": "text",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Mail body"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "A token previously acquired via prop=info"
+				},
+				"ccme": {
+					"name": "ccme",
+					"location": "query",
+					"type": "boolean",
+					"description": "Send a copy of this mail to me"
+				}
+			}
+		},
+		"watch": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Add or remove a page from\/to the current user's watchlist",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "watch",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"title": {
+					"name": "title",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "The page to (un)watch"
+				},
+				"unwatch": {
+					"name": "unwatch",
+					"location": "query",
+					"type": "boolean",
+					"description": "If set the page will be unwatched rather than watched"
+				},
+				"uselang": {
+					"name": "uselang",
+					"location": "query",
+					"type": "string",
+					"description": "Language to show the message in"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "A token previously acquired via prop=info"
+				}
+			}
+		},
+		"patrol": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Patrol a page or revision",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "patrol",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Patrol token obtained from list=recentchanges"
+				},
+				"rcid": {
+					"name": "rcid",
+					"location": "query",
+					"type": "integer",
+					"description": "Recentchanges ID to patrol"
+				},
+				"revid": {
+					"name": "revid",
+					"location": "query",
+					"type": "integer",
+					"description": "Revision ID to patrol"
+				}
+			}
+		},
+		"import": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Import a page from another wiki, or an XML file.\nNote that the HTTP POST must be done as a file upload (i.e. using multipart\/form-data) when\nsending a file for the \"xml\" parameter.",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "import",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Import token obtained through prop=info"
+				},
+				"summary": {
+					"name": "summary",
+					"location": "query",
+					"type": "string",
+					"description": "Import summary"
+				},
+				"xml": {
+					"name": "xml",
+					"location": "query",
+					"type": "string",
+					"description": "Uploaded XML file"
+				},
+				"interwikisource": {
+					"name": "interwikisource",
+					"location": "query",
+					"type": "string",
+					"description": "For interwiki imports: wiki to import from"
+				},
+				"interwikipage": {
+					"name": "interwikipage",
+					"location": "query",
+					"type": "string",
+					"description": "For interwiki imports: page to import"
+				},
+				"fullhistory": {
+					"name": "fullhistory",
+					"location": "query",
+					"type": "boolean",
+					"description": "For interwiki imports: import the full history, not just the current version"
+				},
+				"templates": {
+					"name": "templates",
+					"location": "query",
+					"type": "boolean",
+					"description": "For interwiki imports: import all included templates as well"
+				},
+				"namespace": {
+					"name": "namespace",
+					"location": "query",
+					"type": "string",
+					"description": "For interwiki imports: import to this namespace"
+				},
+				"rootpage": {
+					"name": "rootpage",
+					"location": "query",
+					"type": "string",
+					"description": "Import as subpage of this page"
+				}
+			}
+		},
+		"userrights": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Add\/remove a user to\/from groups",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "userrights",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"user": {
+					"name": "user",
+					"location": "query",
+					"type": "string",
+					"description": "User name"
+				},
+				"userid": {
+					"name": "userid",
+					"location": "query",
+					"type": "integer",
+					"description": "User id"
+				},
+				"add": {
+					"name": "add",
+					"location": "query",
+					"type": "string",
+					"description": "Add the user to these groups"
+				},
+				"remove": {
+					"name": "remove",
+					"location": "query",
+					"type": "string",
+					"description": "Remove the user from these groups"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "A userrights token previously retrieved through list=users"
+				},
+				"reason": {
+					"name": "reason",
+					"location": "query",
+					"type": "string",
+					"description": "Reason for the change"
+				}
+			}
+		},
+		"options": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Change preferences of the current user\nOnly options which are registered in core or in one of installed extensions,\nor as options with keys prefixed with 'userjs-' (intended to be used by user\nscripts), can be set.",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "options",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "An options token previously obtained through the action=tokens"
+				},
+				"reset": {
+					"name": "reset",
+					"location": "query",
+					"type": "boolean",
+					"description": "Resets preferences to the site defaults"
+				},
+				"resetkinds": {
+					"name": "resetkinds",
+					"location": "query",
+					"type": "string",
+					"description": "List of types of options to reset when the \"reset\" option is set"
+				},
+				"change": {
+					"name": "change",
+					"location": "query",
+					"type": "string",
+					"description": "List of changes, formatted name=value (e.g. skin=vector), value cannot contain pipe characters. If no value is given (not even an equals sign), e.g., optionname|otheroption|..., the option will be reset to its default value"
+				},
+				"optionname": {
+					"name": "optionname",
+					"location": "query",
+					"type": "string",
+					"description": "A name of a option which should have an optionvalue set"
+				},
+				"optionvalue": {
+					"name": "optionvalue",
+					"location": "query",
+					"type": "string",
+					"description": "A value of the option specified by the optionname, can contain pipe characters"
+				}
+			}
+		},
+		"imagerotate": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Rotate one or more images",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"default": "imagerotate",
+					"static": true,
+					"type": "string",
+					"location": "query"
+				},
+				"rotation": {
+					"name": "rotation",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Degrees to rotate image clockwise"
+				},
+				"token": {
+					"name": "token",
+					"location": "query",
+					"type": "string",
+					"required": true,
+					"description": "Edit token. You can get one of these through action=tokens"
+				},
+				"titles": {
+					"name": "titles",
+					"location": "query",
+					"type": "string",
+					"description": "A list of titles to work on"
+				},
+				"pageids": {
+					"name": "pageids",
+					"location": "query",
+					"type": "integer",
+					"description": "A list of page IDs to work on"
+				},
+				"revids": {
+					"name": "revids",
+					"location": "query",
+					"type": "integer",
+					"description": "A list of revision IDs to work on"
+				},
+				"redirects": {
+					"name": "redirects",
+					"location": "query",
+					"type": "boolean",
+					"description": "Automatically resolve redirects"
+				},
+				"converttitles": {
+					"name": "converttitles",
+					"location": "query",
+					"type": "boolean",
+					"description": "Convert titles to other variants if necessary. Only works if the wiki's content language supports variant conversion.\nLanguages that support variant conversion include gan, iu, kk, ku, shi, sr, tg, uz, zh"
+				},
+				"generator": {
+					"name": "generator",
+					"location": "query",
+					"type": "string",
+					"description": "Get the list of pages to work on by executing the specified query module.\nNOTE: generator parameter names must be prefixed with a 'g', see examples"
 				}
 			}
 		}
-    }
+	}
 }
