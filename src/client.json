@@ -25,29 +25,29 @@
 					"default": "login",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"lgname": {
 					"name": "lgname",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "User Name"
 				},
 				"lgpassword": {
 					"name": "lgpassword",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Password"
 				},
 				"lgdomain": {
 					"name": "lgdomain",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Domain (optional)"
 				},
 				"lgtoken": {
 					"name": "lgtoken",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Login token obtained in first request"
 				}
@@ -77,60 +77,60 @@
 					"default": "createaccount",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"name": {
 					"name": "name",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Username"
 				},
 				"password": {
 					"name": "password",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Password (ignored if mailpassword is set)"
 				},
 				"domain": {
 					"name": "domain",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Domain for external authentication (optional)"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Account creation token obtained in first request"
 				},
 				"email": {
 					"name": "email",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Email address of user (optional)"
 				},
 				"realname": {
 					"name": "realname",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Real name of user (optional)"
 				},
 				"mailpassword": {
 					"name": "mailpassword",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "If set to any value, a random password will be emailed to the user"
 				},
 				"reason": {
 					"name": "reason",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Optional reason for creating the account to be put in the logs"
 				},
 				"language": {
 					"name": "language",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Language code to set as default for the user (optional, defaults to content language)"
 				}
@@ -758,53 +758,53 @@
 					"default": "purge",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"forcelinkupdate": {
 					"name": "forcelinkupdate",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Update the links tables"
 				},
 				"forcerecursivelinkupdate": {
 					"name": "forcerecursivelinkupdate",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Update the links table, and update the links tables for any page that uses this page as a template"
 				},
 				"titles": {
 					"name": "titles",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "A list of titles to work on"
 				},
 				"pageids": {
 					"name": "pageids",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "A list of page IDs to work on"
 				},
 				"revids": {
 					"name": "revids",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "A list of revision IDs to work on"
 				},
 				"redirects": {
 					"name": "redirects",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Automatically resolve redirects"
 				},
 				"converttitles": {
 					"name": "converttitles",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Convert titles to other variants if necessary. Only works if the wiki's content language supports variant conversion.\nLanguages that support variant conversion include gan, iu, kk, ku, shi, sr, tg, uz, zh"
 				},
 				"generator": {
 					"name": "generator",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Get the list of pages to work on by executing the specified query module.\nNOTE: generator parameter names must be prefixed with a 'g', see examples"
 				}
@@ -820,71 +820,71 @@
 					"default": "setnotificationtimestamp",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"entirewatchlist": {
 					"name": "entirewatchlist",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Work on all watched pages"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "A token previously acquired via prop=info"
 				},
 				"timestamp": {
 					"name": "timestamp",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Timestamp to which to set the notification timestamp"
 				},
 				"torevid": {
 					"name": "torevid",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "Revision to set the notification timestamp to (one page only)"
 				},
 				"newerthanrevid": {
 					"name": "newerthanrevid",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "Revision to set the notification timestamp newer than (one page only)"
 				},
 				"titles": {
 					"name": "titles",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "A list of titles to work on"
 				},
 				"pageids": {
 					"name": "pageids",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "A list of page IDs to work on"
 				},
 				"revids": {
 					"name": "revids",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "A list of revision IDs to work on"
 				},
 				"redirects": {
 					"name": "redirects",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Automatically resolve redirects"
 				},
 				"converttitles": {
 					"name": "converttitles",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Convert titles to other variants if necessary. Only works if the wiki's content language supports variant conversion.\nLanguages that support variant conversion include gan, iu, kk, ku, shi, sr, tg, uz, zh"
 				},
 				"generator": {
 					"name": "generator",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Get the list of pages to work on by executing the specified query module.\nNOTE: generator parameter names must be prefixed with a 'g', see examples"
 				}
@@ -900,44 +900,44 @@
 					"default": "rollback",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"title": {
 					"name": "title",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Title of the page you want to rollback."
 				},
 				"user": {
 					"name": "user",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Name of the user whose edits are to be rolled back. If set incorrectly, you'll get a badtoken error."
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "A rollback token previously retrieved through prop=revisions"
 				},
 				"summary": {
 					"name": "summary",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Custom edit summary. If empty, default summary will be used"
 				},
 				"markbot": {
 					"name": "markbot",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Mark the reverted edits and the revert as bot edits"
 				},
 				"watchlist": {
 					"name": "watchlist",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
 				}
@@ -953,54 +953,54 @@
 					"default": "delete",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"title": {
 					"name": "title",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Title of the page you want to delete. Cannot be used together with pageid"
 				},
 				"pageid": {
 					"name": "pageid",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "Page ID of the page you want to delete. Cannot be used together with title"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "A delete token previously retrieved through prop=info"
 				},
 				"reason": {
 					"name": "reason",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Reason for the deletion. If not set, an automatically generated reason will be used"
 				},
 				"watch": {
 					"name": "watch",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Add the page to your watchlist"
 				},
 				"watchlist": {
 					"name": "watchlist",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
 				},
 				"unwatch": {
 					"name": "unwatch",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Remove the page from your watchlist"
 				},
 				"oldimage": {
 					"name": "oldimage",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "The name of the old image to delete as provided by iiprop=archivename"
 				}
@@ -1016,37 +1016,37 @@
 					"default": "undelete",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"title": {
 					"name": "title",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Title of the page you want to restore"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "An undelete token previously retrieved through list=deletedrevs"
 				},
 				"reason": {
 					"name": "reason",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Reason for restoring"
 				},
 				"timestamps": {
 					"name": "timestamps",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Timestamps of the revisions to restore. If not set, all revisions will be restored."
 				},
 				"watchlist": {
 					"name": "watchlist",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
 				}
@@ -1062,61 +1062,61 @@
 					"default": "protect",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"title": {
 					"name": "title",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Title of the page you want to (un)protect. Cannot be used together with pageid"
 				},
 				"pageid": {
 					"name": "pageid",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "ID of the page you want to (un)protect. Cannot be used together with title"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "A protect token previously retrieved through prop=info"
 				},
 				"protections": {
 					"name": "protections",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "List of protection levels, formatted action=group (e.g. edit=sysop)"
 				},
 				"expiry": {
 					"name": "expiry",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Expiry timestamps. If only one timestamp is set, it'll be used for all protections.\nUse 'infinite', 'indefinite' or 'never', for a never-expiring protection."
 				},
 				"reason": {
 					"name": "reason",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Reason for (un)protecting"
 				},
 				"cascade": {
 					"name": "cascade",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Enable cascading protection (i.e. protect pages included in this page)\nIgnored if not all protection levels are 'sysop' or 'protect'"
 				},
 				"watch": {
 					"name": "watch",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "If set, add the page being (un)protected to your watchlist"
 				},
 				"watchlist": {
 					"name": "watchlist",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
 				}
@@ -1132,78 +1132,78 @@
 					"default": "block",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"user": {
 					"name": "user",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Username, IP address or IP range you want to block"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "A block token previously obtained through prop=info"
 				},
 				"expiry": {
 					"name": "expiry",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Relative expiry time, e.g. '5 months' or '2 weeks'. If set to 'infinite', 'indefinite' or 'never', the block will never expire."
 				},
 				"reason": {
 					"name": "reason",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Reason for block"
 				},
 				"anononly": {
 					"name": "anononly",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Block anonymous users only (i.e. disable anonymous edits for this IP)"
 				},
 				"nocreate": {
 					"name": "nocreate",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Prevent account creation"
 				},
 				"autoblock": {
 					"name": "autoblock",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Automatically block the last used IP address, and any subsequent IP addresses they try to login from"
 				},
 				"noemail": {
 					"name": "noemail",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Prevent user from sending email through the wiki. (Requires the \"blockemail\" right.)"
 				},
 				"hidename": {
 					"name": "hidename",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Hide the username from the block log. (Requires the \"hideuser\" right.)"
 				},
 				"allowusertalk": {
 					"name": "allowusertalk",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Allow the user to edit their own talk page (depends on $wgBlockAllowsUTEdit)"
 				},
 				"reblock": {
 					"name": "reblock",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "If the user is already blocked, overwrite the existing block"
 				},
 				"watchuser": {
 					"name": "watchuser",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Watch the user\/IP's user and talk pages"
 				}
@@ -1219,29 +1219,29 @@
 					"default": "unblock",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"id": {
 					"name": "id",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "ID of the block you want to unblock (obtained through list=blocks). Cannot be used together with user"
 				},
 				"user": {
 					"name": "user",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Username, IP address or IP range you want to unblock. Cannot be used together with id"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "An unblock token previously obtained through prop=info"
 				},
 				"reason": {
 					"name": "reason",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Reason for unblock"
 				}
@@ -1257,79 +1257,79 @@
 					"default": "move",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"from": {
 					"name": "from",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Title of the page you want to move. Cannot be used together with fromid"
 				},
 				"fromid": {
 					"name": "fromid",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "Page ID of the page you want to move. Cannot be used together with from"
 				},
 				"to": {
 					"name": "to",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Title you want to rename the page to"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "A move token previously retrieved through prop=info"
 				},
 				"reason": {
 					"name": "reason",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Reason for the move"
 				},
 				"movetalk": {
 					"name": "movetalk",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Move the talk page, if it exists"
 				},
 				"movesubpages": {
 					"name": "movesubpages",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Move subpages, if applicable"
 				},
 				"noredirect": {
 					"name": "noredirect",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Don't create a redirect"
 				},
 				"watch": {
 					"name": "watch",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Add the page and the redirect to your watchlist"
 				},
 				"unwatch": {
 					"name": "unwatch",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Remove the page and the redirect from your watchlist"
 				},
 				"watchlist": {
 					"name": "watchlist",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
 				},
 				"ignorewarnings": {
 					"name": "ignorewarnings",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Ignore any warnings"
 				}
@@ -1345,162 +1345,162 @@
 					"default": "edit",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"title": {
 					"name": "title",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Title of the page you want to edit. Cannot be used together with pageid"
 				},
 				"pageid": {
 					"name": "pageid",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "Page ID of the page you want to edit. Cannot be used together with title"
 				},
 				"section": {
 					"name": "section",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Section number. 0 for the top section, 'new' for a new section"
 				},
 				"sectiontitle": {
 					"name": "sectiontitle",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "The title for a new section"
 				},
 				"text": {
 					"name": "text",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Page content"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Edit token. You can get one of these through prop=info.\nThe token should always be sent as the last parameter, or at least, after the text parameter"
 				},
 				"summary": {
 					"name": "summary",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Edit summary. Also section title when section=new and sectiontitle is not set"
 				},
 				"minor": {
 					"name": "minor",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Minor edit"
 				},
 				"notminor": {
 					"name": "notminor",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Non-minor edit"
 				},
 				"bot": {
 					"name": "bot",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Mark this edit as bot"
 				},
 				"basetimestamp": {
 					"name": "basetimestamp",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Timestamp of the base revision (obtained through prop=revisions&rvprop=timestamp).\nUsed to detect edit conflicts; leave unset to ignore conflicts"
 				},
 				"starttimestamp": {
 					"name": "starttimestamp",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Timestamp when you obtained the edit token.\nUsed to detect edit conflicts; leave unset to ignore conflicts"
 				},
 				"recreate": {
 					"name": "recreate",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Override any errors about the article having been deleted in the meantime"
 				},
 				"createonly": {
 					"name": "createonly",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Don't edit the page if it exists already"
 				},
 				"nocreate": {
 					"name": "nocreate",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Throw an error if the page doesn't exist"
 				},
 				"watch": {
 					"name": "watch",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Add the page to your watchlist"
 				},
 				"unwatch": {
 					"name": "unwatch",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Remove the page from your watchlist"
 				},
 				"watchlist": {
 					"name": "watchlist",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
 				},
 				"md5": {
 					"name": "md5",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "The MD5 hash of the text parameter, or the prependtext and appendtext parameters concatenated.\nIf set, the edit won't be done unless the hash is correct"
 				},
 				"prependtext": {
 					"name": "prependtext",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Add this text to the beginning of the page. Overrides text"
 				},
 				"appendtext": {
 					"name": "appendtext",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Add this text to the end of the page. Overrides text.\nUse section=new to append a new section"
 				},
 				"undo": {
 					"name": "undo",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "Undo this revision. Overrides text, prependtext and appendtext"
 				},
 				"undoafter": {
 					"name": "undoafter",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "Undo all revisions from undo to this one. If not set, just undo one revision"
 				},
 				"redirect": {
 					"name": "redirect",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Automatically resolve redirects"
 				},
 				"contentformat": {
 					"name": "contentformat",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Content serialization format used for the input text"
 				},
 				"contentmodel": {
 					"name": "contentmodel",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Content model of the new content"
 				}
@@ -1516,126 +1516,126 @@
 					"default": "upload",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"filename": {
 					"name": "filename",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Target filename"
 				},
 				"comment": {
 					"name": "comment",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Upload comment. Also used as the initial page text for new files if \"text\" is not specified"
 				},
 				"text": {
 					"name": "text",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Initial page text for new files"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Edit token. You can get one of these through prop=info"
 				},
 				"watch": {
 					"name": "watch",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Watch the page"
 				},
 				"watchlist": {
 					"name": "watchlist",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Unconditionally add or remove the page from your watchlist, use preferences or do not change watch"
 				},
 				"ignorewarnings": {
 					"name": "ignorewarnings",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Ignore any warnings"
 				},
 				"file": {
 					"name": "file",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "File contents"
 				},
 				"url": {
 					"name": "url",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "URL to fetch the file from"
 				},
 				"filekey": {
 					"name": "filekey",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Key that identifies a previous upload that was stashed temporarily."
 				},
 				"sessionkey": {
 					"name": "sessionkey",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Same as filekey, maintained for backward compatibility."
 				},
 				"stash": {
 					"name": "stash",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "If set, the server will not add the file to the repository and stash it temporarily."
 				},
 				"filesize": {
 					"name": "filesize",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Filesize of entire upload"
 				},
 				"offset": {
 					"name": "offset",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Offset of chunk in bytes"
 				},
 				"chunk": {
 					"name": "chunk",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Chunk contents"
 				},
 				"async": {
 					"name": "async",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Make potentially large file operations asynchronous when possible"
 				},
 				"asyncdownload": {
 					"name": "asyncdownload",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Make fetching a URL asynchronous"
 				},
 				"leavemessage": {
 					"name": "leavemessage",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "If asyncdownload is used, leave a message on the user talk page if finished"
 				},
 				"statuskey": {
 					"name": "statuskey",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Fetch the upload status for this file key (upload by URL)"
 				},
 				"checkstatus": {
 					"name": "checkstatus",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Only fetch the upload status for the given file key"
 				}
@@ -1651,31 +1651,31 @@
 					"default": "filerevert",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"filename": {
 					"name": "filename",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Target filename without the File: prefix"
 				},
 				"comment": {
 					"name": "comment",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Upload comment"
 				},
 				"archivename": {
 					"name": "archivename",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Archive name of the revision to revert to"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Edit token. You can get one of these through prop=info"
@@ -1692,38 +1692,38 @@
 					"default": "emailuser",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"target": {
 					"name": "target",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "User to send email to"
 				},
 				"subject": {
 					"name": "subject",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Subject header"
 				},
 				"text": {
 					"name": "text",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Mail body"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "A token previously acquired via prop=info"
 				},
 				"ccme": {
 					"name": "ccme",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Send a copy of this mail to me"
 				}
@@ -1739,30 +1739,30 @@
 					"default": "watch",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"title": {
 					"name": "title",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "The page to (un)watch"
 				},
 				"unwatch": {
 					"name": "unwatch",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "If set the page will be unwatched rather than watched"
 				},
 				"uselang": {
 					"name": "uselang",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Language to show the message in"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "A token previously acquired via prop=info"
@@ -1779,24 +1779,24 @@
 					"default": "patrol",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Patrol token obtained from list=recentchanges"
 				},
 				"rcid": {
 					"name": "rcid",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "Recentchanges ID to patrol"
 				},
 				"revid": {
 					"name": "revid",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "Revision ID to patrol"
 				}
@@ -1812,60 +1812,60 @@
 					"default": "import",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Import token obtained through prop=info"
 				},
 				"summary": {
 					"name": "summary",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Import summary"
 				},
 				"xml": {
 					"name": "xml",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Uploaded XML file"
 				},
 				"interwikisource": {
 					"name": "interwikisource",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "For interwiki imports: wiki to import from"
 				},
 				"interwikipage": {
 					"name": "interwikipage",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "For interwiki imports: page to import"
 				},
 				"fullhistory": {
 					"name": "fullhistory",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "For interwiki imports: import the full history, not just the current version"
 				},
 				"templates": {
 					"name": "templates",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "For interwiki imports: import all included templates as well"
 				},
 				"namespace": {
 					"name": "namespace",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "For interwiki imports: import to this namespace"
 				},
 				"rootpage": {
 					"name": "rootpage",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Import as subpage of this page"
 				}
@@ -1881,42 +1881,42 @@
 					"default": "userrights",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"user": {
 					"name": "user",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "User name"
 				},
 				"userid": {
 					"name": "userid",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "User id"
 				},
 				"add": {
 					"name": "add",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Add the user to these groups"
 				},
 				"remove": {
 					"name": "remove",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Remove the user from these groups"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "A userrights token previously retrieved through list=users"
 				},
 				"reason": {
 					"name": "reason",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Reason for the change"
 				}
@@ -1932,42 +1932,42 @@
 					"default": "options",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "An options token previously obtained through the action=tokens"
 				},
 				"reset": {
 					"name": "reset",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Resets preferences to the site defaults"
 				},
 				"resetkinds": {
 					"name": "resetkinds",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "List of types of options to reset when the \"reset\" option is set"
 				},
 				"change": {
 					"name": "change",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "List of changes, formatted name=value (e.g. skin=vector), value cannot contain pipe characters. If no value is given (not even an equals sign), e.g., optionname|otheroption|..., the option will be reset to its default value"
 				},
 				"optionname": {
 					"name": "optionname",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "A name of a option which should have an optionvalue set"
 				},
 				"optionvalue": {
 					"name": "optionvalue",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "A value of the option specified by the optionname, can contain pipe characters"
 				}
@@ -1983,55 +1983,55 @@
 					"default": "imagerotate",
 					"static": true,
 					"type": "string",
-					"location": "query"
+					"location": "postField"
 				},
 				"rotation": {
 					"name": "rotation",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Degrees to rotate image clockwise"
 				},
 				"token": {
 					"name": "token",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"required": true,
 					"description": "Edit token. You can get one of these through action=tokens"
 				},
 				"titles": {
 					"name": "titles",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "A list of titles to work on"
 				},
 				"pageids": {
 					"name": "pageids",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "A list of page IDs to work on"
 				},
 				"revids": {
 					"name": "revids",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"description": "A list of revision IDs to work on"
 				},
 				"redirects": {
 					"name": "redirects",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Automatically resolve redirects"
 				},
 				"converttitles": {
 					"name": "converttitles",
-					"location": "query",
+					"location": "postField",
 					"type": "boolean",
 					"description": "Convert titles to other variants if necessary. Only works if the wiki's content language supports variant conversion.\nLanguages that support variant conversion include gan, iu, kk, ku, shi, sr, tg, uz, zh"
 				},
 				"generator": {
 					"name": "generator",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"description": "Get the list of pages to work on by executing the specified query module.\nNOTE: generator parameter names must be prefixed with a 'g', see examples"
 				}
