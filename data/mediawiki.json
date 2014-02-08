@@ -15,6 +15,38 @@
 				}
 			}
 		},
+		"getAction": {
+			"extends": "_abstract_request",
+			"httpMethod": "GET",
+			"summary": "Action GET request",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"required": true,
+					"type": "string",
+					"location": "query"
+				}
+			},
+			"additionalParameters": {
+				"location": "query"
+			}
+		},
+		"postAction": {
+			"extends": "_abstract_request",
+			"httpMethod": "POST",
+			"summary": "Action POST request",
+			"parameters": {
+				"action": {
+					"name": "action",
+					"required": true,
+					"type": "string",
+					"location": "postField"
+				}
+			},
+			"additionalParameters": {
+				"location": "postField"
+			}
+		},
 		"login": {
 			"extends": "_abstract_request",
 			"httpMethod": "POST",

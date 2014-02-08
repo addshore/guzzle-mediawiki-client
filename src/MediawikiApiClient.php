@@ -10,14 +10,46 @@ use Guzzle\Plugin\Cookie\CookiePlugin;
 use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
 
 /**
- * @method array help( array $params )
- * @method array parse( array $params )
- * @method array login( array $params )
- * @method array logout( array $params )
- * @method array tokens( array $params )
- * @method array upload( array $params )
- * @method array createaccount( array $params )
- * @method array edit( array $params )
+ * Methods within this class as generated from json
+ *
+ * General Methods
+ * @method getAction( array $params )
+ * @method postAction( array $params )
+ *
+ * Api methods
+ * @method login( array $params )
+ * @method logout( array $params )
+ * @method createaccount( array $params )
+ * @method query( array $params )
+ * @method expandtemplates( array $params )
+ * @method parse( array $params )
+ * @method opensearch( array $params )
+ * @method feedcontributions( array $params )
+ * @method feedwatchlist( array $params )
+ * @method help( array $params )
+ * @method paraminfo( array $params )
+ * @method rsd( array $params )
+ * @method compare( array $params )
+ * @method tokens( array $params )
+ * @method purge( array $params )
+ * @method setnotificationtimestamp( array $params )
+ * @method rollback( array $params )
+ * @method delete( array $params )
+ * @method undelete( array $params )
+ * @method protect( array $params )
+ * @method block( array $params )
+ * @method unblock( array $params )
+ * @method move( array $params )
+ * @method edit( array $params )
+ * @method upload( array $params )
+ * @method filerevert( array $params )
+ * @method emailuser( array $params )
+ * @method watch( array $params )
+ * @method patrol( array $params )
+ * @method import( array $params )
+ * @method userrights( array $params )
+ * @method options( array $params )
+ * @method imagerotate( array $params )
  */
 class MediawikiApiClient extends Client
 {
@@ -42,7 +74,7 @@ class MediawikiApiClient extends Client
 
         $client->setConfig($config);
         $client->setUserAgent('addwiki-mediawiki-api-client');
-        $client->setDescription(ServiceDescription::factory(__DIR__ . DIRECTORY_SEPARATOR . 'client.json'));
+        $client->setDescription(ServiceDescription::factory( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'mediawiki.json'));
 
         return $client;
     }

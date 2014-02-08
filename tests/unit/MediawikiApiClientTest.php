@@ -23,6 +23,7 @@ class MediawikiApiClientUnitTest extends \PHPUnit_Framework_TestCase
 		$wikiText = "= Wiki = \n This is test text. \n\nSecond Paragraph\n\n== Foo ==\nLorem Ipsum";
 
 		return array(
+			array( 'getAction', array( 'action' => 'help' ) ),
 			array( 'help', array() ),
 			array( 'help', array('modules' => 'opensearch|parse') ),
 			array( 'paraminfo', array() ),
@@ -30,6 +31,7 @@ class MediawikiApiClientUnitTest extends \PHPUnit_Framework_TestCase
 			array( 'parse', array('page' => 'Wiki') ),
 			array( 'parse', array('text' => $wikiText, 'contentmodel' => 'wikitext') ),
 			array( 'logout', array() ),
+			array( 'postAction', array( 'action' => 'help', 'lgname' => 'foo', 'lgpassword' => 'bar' ) ),
 			array( 'login', array( 'lgname' => 'foo', 'lgpassword' => 'bar' ) ),
 			array( 'login', array( 'lgname' => 'foo', 'lgpassword' => 'bar', 'lgtoken' => 'baz' ) ),
 			array( 'createaccount', array( 'name' => 'foo', 'password' => 'bar' ) ),

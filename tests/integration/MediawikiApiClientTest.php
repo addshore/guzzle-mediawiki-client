@@ -51,4 +51,16 @@ class MediawikiApiClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'ApiHelp', $result['paraminfo']['modules'][0]['classname'] );
 	}
 
+	public function testGetAction() {
+		$client = $this->getClient();
+		$result = $client->getAction( array( 'action' => 'help' ) );
+		$this->assertEquals( 'help', $result['error']['code'] );
+	}
+
+	public function testPostAction() {
+		$client = $this->getClient();
+		$result = $client->postAction( array( 'action' => 'help' ) );
+		$this->assertEquals( 'help', $result['error']['code'] );
+	}
+
 }
