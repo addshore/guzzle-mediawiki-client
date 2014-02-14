@@ -73,7 +73,7 @@ class MediawikiApiClient extends Client
         $client->addSubscriber($cookiePlugin);
 
         $client->setConfig($config);
-        $client->setUserAgent('addwiki-mediawiki-api-client');
+        $client->setUserAgent('addshore-guzzle-mediawiki-client');
         $client->setDescription(ServiceDescription::factory( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'mediawiki.json'));
 
         return $client;

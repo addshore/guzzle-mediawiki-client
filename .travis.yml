@@ -32,7 +32,7 @@ install:
 
 before_script:
   - chmod -R 777 /home/travis/build/www
-  - cd /home/travis/build/addwiki/guzzle-mediawiki
+  - cd /home/travis/build/addshore/guzzle-mediawiki-client
   - composer install
 
 script:
