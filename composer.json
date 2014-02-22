@@ -1,5 +1,5 @@
 {
-    "name": "addshore/guzzle-mediawiki-client",
+    "name": "addwiki/guzzle-mediawiki-client",
     "type": "library",
     "description": "A Mediawiki API client for Guzzle",
     "keywords": ["Guzzle"],
