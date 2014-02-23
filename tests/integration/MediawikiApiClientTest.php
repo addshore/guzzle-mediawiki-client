@@ -42,7 +42,7 @@ class MediawikiApiClientTest extends \PHPUnit_Framework_TestCase {
 			'password' => self::$guzzlePassword,
 			'token' => $result['createaccount']['token']
 		) );
-		$this->assertEquals( 'success', $result['createaccount']['result'] );
+		$this->assertEquals( 'Success', $result['createaccount']['result'] );
 	}
 
 	public function testParaminfo() {
