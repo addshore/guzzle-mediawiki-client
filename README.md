@@ -8,7 +8,7 @@ This fork was originally based on the [mediawiki-api-client repo by gbirke](http
 
 Use composer to install the library and all its dependencies:
 
-    composer require "addwiki/guzzle-mediawiki-client:dev-master"
+    composer require "addwiki/guzzle-mediawiki-client:0.1.*"
 
 ## Usage examples
 ### Parse Wiki Text
