@@ -1595,7 +1595,7 @@
 				},
 				"file": {
 					"name": "file",
-					"location": "postField",
+					"location": "postFile",
 					"type": "string",
 					"description": "File contents"
 				},
