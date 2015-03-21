@@ -1,4 +1,6 @@
-# guzzle-mediawiki-client
+# DEPRECATED guzzle-mediawiki-client
+
+NOTE: This fork is no longer actively maintained and [some issues and known but not fixed](https://github.com/addwiki/guzzle-mediawiki-client/issues/2). Please take a look at the [mediawiki-api-base library](https://github.com/addwiki/mediawiki-api-base).
 
 This is a client for the MediaWiki API. It uses [Guzzle][1] web service library. The client API is a custom web service client based on `Guzzle\Service\Client`.
 
